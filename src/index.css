@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:wght@400&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-cream-50 text-navy-900 font-sans antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+  :lang(hi), [lang="hi"] {
+    font-family: 'Tiro Devanagari Hindi', serif;
+  }
+}
+
+@layer components {
+  .container-px {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-maroon-600 px-6 py-3 font-medium text-cream-50 shadow-soft transition-all duration-300 hover:bg-maroon-700 hover:shadow-card hover:-translate-y-0.5;
+  }
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 px-6 py-3 font-semibold text-maroon-900 shadow-soft transition-all duration-300 hover:from-gold-500 hover:to-gold-600 hover:shadow-glow hover:-translate-y-0.5;
+  }
+  .btn-whatsapp {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3 font-medium text-white shadow-soft transition-all duration-300 hover:bg-[#1da851] hover:-translate-y-0.5;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-maroon-300 bg-transparent px-6 py-3 font-medium text-maroon-700 transition-all duration-300 hover:bg-maroon-50 hover:border-maroon-500;
+  }
+  .card-premium {
+    @apply rounded-2xl bg-white shadow-soft ring-1 ring-maroon-100/50 transition-all duration-300;
+  }
+  .section-pad {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+  .heading-gradient {
+    @apply bg-gradient-to-r from-maroon-700 via-maroon-600 to-saffron-600 bg-clip-text text-transparent;
+  }
+  .ornament-divider {
+    @apply flex items-center justify-center gap-3 text-gold-400;
+  }
+  .ornament-divider::before,
+  .ornament-divider::after {
+    content: '';
+    @apply h-px w-12 bg-gradient-to-r from-gold-300 to-transparent;
+  }
+  .ornament-divider::after {
+    @apply from-transparent to-gold-300;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #fff9ec;
+}
+::-webkit-scrollbar-thumb {
+  background: #b82344;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9a1736;
+}
+
+/* Star field background */
+.starfield {
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 60% 70%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 50% 50%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(2px 2px at 80% 10%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 90% 60%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 33% 80%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(2px 2px at 15% 65%, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(1px 1px at 70% 40%, rgba(255, 255, 255, 0.4), transparent);
+  background-repeat: repeat;
+  background-size: 200% 200%;
+}

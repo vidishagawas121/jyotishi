@@ -1,0 +1,130 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        maroon: {
+          50: '#fbe9ec',
+          100: '#f6cdd4',
+          200: '#ed9aab',
+          300: '#e06880',
+          400: '#d03e5e',
+          500: '#b82344',
+          600: '#9a1736',
+          700: '#7c122b',
+          800: '#5e0d21',
+          900: '#420917',
+          950: '#2a060f',
+        },
+        saffron: {
+          50: '#fff7ed',
+          100: '#ffedd5',
+          200: '#fed7aa',
+          300: '#fdba74',
+          400: '#fb923c',
+          500: '#f97316',
+          600: '#ea670c',
+          700: '#c2410c',
+          800: '#9a3412',
+          900: '#7c2d12',
+          950: '#431407',
+        },
+        gold: {
+          50: '#fdfaec',
+          100: '#faf2c8',
+          200: '#f5e48e',
+          300: '#efce4f',
+          400: '#e8b62a',
+          500: '#d4981a',
+          600: '#b27614',
+          700: '#8c5614',
+          800: '#744417',
+          900: '#633918',
+          950: '#3a200b',
+        },
+        cream: {
+          50: '#fffdf7',
+          100: '#fff9ec',
+          200: '#fef1d4',
+          300: '#fce4ad',
+          400: '#f9d07a',
+          500: '#f5b949',
+        },
+        navy: {
+          50: '#eef2f8',
+          100: '#d5deee',
+          200: '#aabddd',
+          300: '#7a98c6',
+          400: '#4f72a8',
+          500: '#365889',
+          600: '#2a4570',
+          700: '#1f3457',
+          800: '#152544',
+          900: '#0d1a33',
+          950: '#070f20',
+        },
+      },
+      fontFamily: {
+        devanagari: ['"Tiro Devanagari Hindi"', 'serif'],
+        display: ['"Cormorant Garamond"', 'serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
+      boxShadow: {
+        soft: '0 4px 24px -8px rgba(66, 9, 23, 0.12)',
+        card: '0 8px 32px -12px rgba(66, 9, 23, 0.18)',
+        glow: '0 0 40px -8px rgba(232, 182, 42, 0.35)',
+      },
+      borderRadius: {
+        xl: '0.875rem',
+        '2xl': '1.25rem',
+        '3xl': '1.75rem',
+      },
+      keyframes: {
+        'fade-up': {
+          '0%': { opacity: '0', transform: 'translateY(24px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'scale-in': {
+          '0%': { opacity: '0', transform: 'scale(0.96)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        'spin-slow': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+        twinkle: {
+          '0%, 100%': { opacity: '0.3' },
+          '50%': { opacity: '1' },
+        },
+        'pulse-ring': {
+          '0%': { transform: 'scale(0.95)', opacity: '0.7' },
+          '70%': { transform: 'scale(1.1)', opacity: '0' },
+          '100%': { transform: 'scale(0.95)', opacity: '0' },
+        },
+      },
+      animation: {
+        'fade-up': 'fade-up 0.7s ease-out forwards',
+        'fade-in': 'fade-in 0.8s ease-out forwards',
+        'scale-in': 'scale-in 0.6s ease-out forwards',
+        float: 'float 4s ease-in-out infinite',
+        'spin-slow': 'spin-slow 40s linear infinite',
+        twinkle: 'twinkle 3s ease-in-out infinite',
+        'pulse-ring': 'pulse-ring 2s ease-out infinite',
+      },
+      backgroundImage: {
+        'mandala-radial':
+          'radial-gradient(circle at center, rgba(232,182,42,0.08) 0%, transparent 60%)',
+      },
+    },
+  },
+  plugins: [],
+};
