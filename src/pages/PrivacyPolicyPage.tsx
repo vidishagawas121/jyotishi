@@ -1,4 +1,4 @@
-import { Shield, Lock, Eye, FileText, Phone } from 'lucide-react';
+import { Shield } from 'lucide-react';
 import { siteConfig } from '@/data/siteConfig';
 
 export function PrivacyPolicyPage() {

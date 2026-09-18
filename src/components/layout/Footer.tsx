@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, Facebook, Instagram, Youtube, MessageCircle } from 'lucide-react';
+import { Phone, Facebook, Instagram, Youtube, MessageCircle } from 'lucide-react';
 import { siteConfig } from '@/data/siteConfig';
 
 export function Footer() {

@@ -1,4 +1,4 @@
-import { FileCheck, ShieldAlert, Scale } from 'lucide-react';
+import { Scale } from 'lucide-react';
 import { siteConfig } from '@/data/siteConfig';
 
 export function TermsPage() {

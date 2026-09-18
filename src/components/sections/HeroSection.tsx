@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { Calendar, MessageCircle, Sparkles, Check } from 'lucide-react';
-import { siteConfig } from '@/data/siteConfig';
 import { trustIndicators } from '@/data/content';
 import { waGeneral } from '@/lib/whatsapp';
 
