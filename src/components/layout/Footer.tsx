@@ -170,9 +170,13 @@ export function Footer() {
       </div>
 
       <div className="border-t border-navy-900 bg-navy-950/80">
-        <div className="container-px flex flex-col items-center justify-between gap-2 py-3.5 text-xs sm:text-sm text-cream-100/65 sm:flex-row">
+        <div className="container-px flex flex-col items-center justify-between gap-3 py-4 text-xs sm:text-sm text-cream-100/65 md:flex-row">
           <p>© 2026 Sangam Jyotish Sansthan. All Rights Reserved.</p>
-          <div className="flex flex-wrap items-center gap-4">
+          <p className="text-center text-cream-100/75">
+            Designed & Developed by{' '}
+            <span className="font-semibold text-gold-400">Fourise Software Solutions Pvt. Ltd Pune</span>
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
             <Link to="/privacy-policy" className="transition-colors hover:text-gold-300">Privacy Policy</Link>
             <Link to="/terms" className="transition-colors hover:text-gold-300">Terms & Conditions</Link>
             <Link to="/disclaimer" className="transition-colors hover:text-gold-300">Disclaimer</Link>
