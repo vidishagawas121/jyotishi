@@ -21,7 +21,7 @@ export function SectionHeading({
       <div className={isCenter ? 'mx-auto max-w-3xl text-center' : 'max-w-3xl text-left'}>
         {label && (
           <div
-            className={`mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider ${
+            className={`mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider ${
               isCenter ? 'justify-center' : 'justify-start'
             } ${light ? 'text-gold-300' : 'text-saffron-600'}`}
           >
@@ -31,7 +31,7 @@ export function SectionHeading({
           </div>
         )}
         <h2
-          className={`font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-[2.75rem] ${
+          className={`font-devanagari text-3xl font-bold leading-[1.4] sm:text-4xl sm:leading-[1.45] lg:text-[2.75rem] lg:leading-[1.4] ${
             light ? 'text-cream-50' : 'text-maroon-800'
           }`}
           lang="hi"

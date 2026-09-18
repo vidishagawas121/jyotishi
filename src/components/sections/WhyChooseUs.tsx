@@ -7,11 +7,11 @@ export function WhyChooseUs() {
     <section className="section-pad">
       <div className="container-px">
         <SectionHeading
-          label="क्यों चुनें"
-          title="संगम ज्योतिष संस्थान को क्यों चुनें?"
-          subtitle="हमारी प्रतिबद्धता प्रामाणिक वैदिक मार्गदर्शन एवं व्यक्तिगत ध्यान के प्रति है।"
+          label="हमारी विशेषताएं"
+          title="संगम ज्योतिष संस्थान क्यों चुनें?"
+          subtitle="हमारी प्रतिबद्धता प्रामाणिक वैदिक सिद्धांतों, व्यक्तिगत ध्यान और पूर्ण गोपनीयता के प्रति है।"
         />
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, i) => (
             <FeatureCard key={feature.title} feature={feature} index={i} />
           ))}

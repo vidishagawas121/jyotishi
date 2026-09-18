@@ -19,7 +19,7 @@ export function AstrologersPage() {
   return (
     <div className="bg-cream-50">
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-maroon-900 via-maroon-800 to-navy-900 py-20 text-cream-100 lg:py-28">
+      <section className="relative overflow-hidden bg-gradient-to-br from-maroon-950 via-maroon-900 to-navy-950 py-20 text-cream-100 lg:py-28">
         <div className="starfield absolute inset-0 opacity-30" aria-hidden />
         <div className="pointer-events-none absolute right-1/4 top-1/2 -translate-y-1/2 rounded-full bg-gold-400/10 blur-3xl w-96 h-96" />
 
@@ -30,14 +30,14 @@ export function AstrologersPage() {
             <Users className="h-4 w-4 text-gold-300" />
           </div>
 
-          <h1 className="mt-6 font-devanagari text-4xl font-bold tracking-tight text-cream-50 sm:text-5xl lg:text-6xl" lang="hi">
+          <h1 className="mt-6 font-devanagari text-4xl font-bold leading-[1.35] text-cream-50 sm:text-5xl sm:leading-[1.4] lg:text-6xl lg:leading-[1.35]" lang="hi">
             हमारे ज्योतिष विशेषज्ञ
           </h1>
           <p className="mx-auto mt-4 max-w-2xl font-display text-lg text-gold-300 sm:text-xl" lang="hi">
-            अनुभवी विशेषज्ञों से व्यक्तिगत ज्योतिषीय मार्गदर्शन प्राप्त करें
+            पारंपरिक वैदिक सिद्धांतों के अनुसार व्यक्तिगत ज्योतिषीय मार्गदर्शन
           </p>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-cream-100/80 sm:text-base" lang="hi">
-            पारंपरिक ज्ञान, शास्त्रीय अध्ययन और व्यावहारिक समझ से युक्त हमारे आचार्य आपके प्रश्नों का धैर्यपूर्वक और सटीक समाधान प्रदान करते हैं।
+            पारंपरिक ज्ञान, शास्त्रीय अध्ययन और व्यावहारिक समझ से युक्त हमारे आचार्य आपके प्रश्नों का धैर्यपूर्वक और सूक्ष्म अध्ययन करके मार्गदर्शन प्रदान करते हैं।
           </p>
         </div>
       </section>
@@ -53,8 +53,8 @@ export function AstrologersPage() {
                 onClick={() => setSelectedFilter(filter)}
                 className={`rounded-full px-5 py-2 text-sm font-medium transition-all duration-300 ${
                   selectedFilter === filter
-                    ? 'bg-maroon-700 text-cream-50 shadow-soft scale-105'
-                    : 'bg-white text-navy-700 hover:bg-maroon-50 border border-maroon-100/80'
+                    ? 'bg-maroon-700 text-cream-50 shadow-soft scale-105 ring-2 ring-gold-400/30'
+                    : 'bg-white text-navy-700 hover:bg-maroon-50 border border-gold-200/50'
                 }`}
                 lang="hi"
               >
@@ -73,17 +73,17 @@ export function AstrologersPage() {
       </section>
 
       {/* Trust & Ethics Banner */}
-      <section className="section-pad bg-gradient-to-b from-cream-100/60 to-cream-50">
+      <section className="section-pad bg-gradient-to-b from-cream-100/60 to-cream-50 border-t border-gold-200/30">
         <div className="container-px">
           <SectionHeading
             label="हमारी आचार संहिता"
-            title="विश्वसनीय एवं प्रामाणिक मार्गदर्शन की गारंटी"
-            subtitle="हम केवल प्रामाणिक वैदिक सिद्धांतों का पालन करते हैं"
+            title="विश्वसनीय एवं प्रामाणिक मार्गदर्शन की प्रतिबद्धता"
+            subtitle="हम केवल प्रामाणिक वैदिक सिद्धांतों एवं संवेदनशील परामर्श का पालन करते हैं"
           />
 
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
             <Reveal delay={100}>
-              <div className="card-premium p-6 text-center">
+              <div className="card-premium p-6 text-center rounded-2xl border border-gold-300/30 bg-white">
                 <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-maroon-50 text-maroon-700">
                   <ShieldCheck className="h-6 w-6" />
                 </div>
@@ -97,7 +97,7 @@ export function AstrologersPage() {
             </Reveal>
 
             <Reveal delay={200}>
-              <div className="card-premium p-6 text-center">
+              <div className="card-premium p-6 text-center rounded-2xl border border-gold-300/30 bg-white">
                 <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-saffron-50 text-saffron-700">
                   <Sparkles className="h-6 w-6" />
                 </div>
@@ -111,7 +111,7 @@ export function AstrologersPage() {
             </Reveal>
 
             <Reveal delay={300}>
-              <div className="card-premium p-6 text-center">
+              <div className="card-premium p-6 text-center rounded-2xl border border-gold-300/30 bg-white">
                 <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gold-50 text-gold-700">
                   <HeartHandshake className="h-6 w-6" />
                 </div>
@@ -129,7 +129,7 @@ export function AstrologersPage() {
 
       {/* CTA */}
       <CTASection
-        title="किसी विशेष आचार्य से परामर्श चाहते हैं?"
+        title="किसी विशेष विषय पर परामर्श चाहते हैं?"
         subtitle="सीधे WhatsApp पर संपर्क करें या अपनी सुविधानुसार अपॉइंटमेंट बुक करें।"
       />
     </div>

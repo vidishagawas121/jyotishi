@@ -14,28 +14,22 @@ import {
   ArrowLeft,
   ShieldCheck,
   Clock,
-  Sparkles
+  Sparkles,
+  Layers
 } from 'lucide-react';
 
 export function ServiceDetailPage() {
   const { slug } = useParams<{ slug: string }>();
 
   // Find service by exact slug or alias
-  const service = services.find(
-    (s) =>
-      s.slug === slug ||
-      (slug === 'career' && s.slug === 'career-guidance') ||
-      (slug === 'business' && s.slug === 'business-consultation') ||
-      (slug === 'vastu' && s.slug === 'vastu-consultation') ||
-      (slug === 'muhurat' && s.slug === 'muhurat-consultation')
-  );
+  const service = services.find((s) => s.slug === slug);
 
   if (!service) {
     return <Navigate to="/services" replace />;
   }
 
   const Icon = getIcon(service.icon);
-  const otherServices = services.filter((s) => s.slug !== service.slug).slice(0, 3);
+  const otherServices = services.filter((s) => s.slug !== service.slug).slice(0, 4);
 
   return (
     <div className="bg-cream-50">
@@ -57,66 +51,81 @@ export function ServiceDetailPage() {
       </div>
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-maroon-900 via-maroon-800 to-navy-900 py-16 text-cream-100 lg:py-24">
+      <section className="relative overflow-hidden bg-gradient-to-br from-maroon-900 via-maroon-800 to-navy-950 py-16 text-cream-100 lg:py-24">
         <div className="starfield absolute inset-0 opacity-30" aria-hidden />
         <div className="pointer-events-none absolute right-10 top-1/2 -translate-y-1/2 rounded-full bg-gold-400/10 blur-3xl w-96 h-96" />
 
-        <div className="container-px relative">
-          <div className="max-w-3xl">
-            <Link
-              to="/services"
-              className="inline-flex items-center gap-1.5 text-xs text-gold-300 hover:text-gold-200 transition-colors mb-4"
-            >
-              <ArrowLeft className="h-3.5 w-3.5" />
-              <span>सभी सेवाएं</span>
-            </Link>
-
-            <div className="flex items-center gap-4 mb-4">
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-gold-400/20 to-maroon-700/40 text-gold-300 ring-2 ring-gold-400/30">
-                <Icon className="h-8 w-8" />
-              </div>
-              <div>
-                <span className="rounded-full bg-gold-400/20 px-3 py-0.5 text-xs font-semibold text-gold-300">
-                  {service.titleEn}
-                </span>
-                <h1 className="mt-1 font-devanagari text-3xl font-bold tracking-tight text-cream-50 sm:text-4xl lg:text-5xl" lang="hi">
-                  {service.title}
-                </h1>
-              </div>
+        <div className="container-px relative text-center">
+          <div className="mx-auto max-w-3xl">
+            {/* Centered Back link */}
+            <div className="mb-6 flex justify-center">
+              <Link
+                to="/services"
+                className="inline-flex items-center gap-2 rounded-full border border-gold-400/30 bg-gold-400/10 px-4 py-1.5 text-xs font-medium text-gold-300 transition-colors hover:bg-gold-400/20 hover:text-gold-200 backdrop-blur-sm"
+              >
+                <ArrowLeft className="h-3.5 w-3.5" />
+                <span>सभी सेवाएं देखें</span>
+              </Link>
             </div>
 
-            <p className="mt-4 text-base leading-relaxed text-cream-100/90 sm:text-lg" lang="hi">
+            {/* Centered Icon */}
+            <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-gold-400/20 to-maroon-700/50 text-gold-300 ring-4 ring-gold-400/25 shadow-glow">
+              <Icon className="h-10 w-10" />
+            </div>
+
+            {/* English Badge with generous spacing */}
+            <div className="mb-4">
+              <span className="inline-block rounded-full border border-gold-400/30 bg-gold-400/15 px-4 py-1 text-xs font-semibold tracking-wide text-gold-300">
+                {service.titleEn}
+              </span>
+            </div>
+
+            {/* Hindi Main Title */}
+            <h1
+              className="font-devanagari text-3xl font-bold leading-[1.35] text-cream-50 sm:text-4xl sm:leading-[1.4] lg:text-5xl lg:leading-[1.35] drop-shadow-sm"
+              lang="hi"
+            >
+              {service.title}
+            </h1>
+
+            {/* Description */}
+            <p
+              className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-cream-100/90 sm:text-lg font-normal"
+              lang="hi"
+            >
               {service.shortDescription}
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link to="/appointment" className="btn-gold">
+            {/* CTAs */}
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+              <Link to="/appointment" className="btn-gold font-semibold shadow-card">
                 <Calendar className="h-4 w-4" />
-                <span lang="hi">अपॉइंटमेंट बुक करें</span>
+                <span lang="hi">परामर्श बुक करें</span>
               </Link>
               <a
                 href={waServiceLink(service.title)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-whatsapp"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3 font-semibold text-white shadow-soft transition-all duration-300 hover:bg-[#1da851] hover:-translate-y-0.5"
               >
                 <MessageCircle className="h-4 w-4" />
                 <span lang="hi">WhatsApp पर परामर्श लें</span>
               </a>
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-6 text-xs text-cream-100/80 border-t border-maroon-700/60 pt-4">
+            {/* Trust Badges */}
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-6 border-t border-maroon-700/60 pt-6 text-xs sm:text-sm text-cream-100/80">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="h-4 w-4 text-gold-400" />
                 <span>100% गोपनीय परामर्श</span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="h-4 w-4 text-gold-400" />
-                <span>45-60 मिनट विस्तृत सत्र</span>
+                <span>व्यक्तिगत एवं विस्तृत सत्र</span>
               </div>
               <div className="flex items-center gap-2">
                 <Sparkles className="h-4 w-4 text-gold-400" />
-                <span>व्यक्तिगत एवं वैदिक समाधान</span>
+                <span>प्रामाणिक वैदिक समाधान</span>
               </div>
             </div>
           </div>
@@ -131,7 +140,7 @@ export function ServiceDetailPage() {
             <div className="space-y-12 lg:col-span-2">
               {/* Introduction */}
               <Reveal>
-                <div className="card-premium p-8">
+                <div className="card-premium p-8 rounded-2xl border border-gold-300/30 bg-white">
                   <h2 className="font-devanagari text-2xl font-bold text-maroon-800 mb-4" lang="hi">
                     सेवा का विस्तृत परिचय
                   </h2>
@@ -141,14 +150,41 @@ export function ServiceDetailPage() {
                 </div>
               </Reveal>
 
+              {/* Topics Covered */}
+              {service.topicsCovered && service.topicsCovered.length > 0 && (
+                <Reveal>
+                  <div className="card-premium p-8 rounded-2xl border border-gold-300/30 bg-white">
+                    <div className="flex items-center gap-2.5 mb-2">
+                      <Layers className="h-5 w-5 text-maroon-700" />
+                      <h2 className="font-devanagari text-2xl font-bold text-maroon-800" lang="hi">
+                        प्रमुख विचारणीय विषय एवं पहलू
+                      </h2>
+                    </div>
+                    <p className="text-xs text-saffron-600 font-semibold uppercase tracking-wider mb-6">
+                      Key Topics & Astrological Aspects Covered
+                    </p>
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      {service.topicsCovered.map((topic, idx) => (
+                        <div key={idx} className="flex items-start gap-2.5 rounded-xl border border-gold-200/50 bg-cream-50 p-3.5">
+                          <span className="h-2 w-2 rounded-full bg-gold-500 mt-1.5 flex-shrink-0" />
+                          <span className="text-sm font-medium text-navy-800" lang="hi">
+                            {topic}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </Reveal>
+              )}
+
               {/* Who should consider */}
               <Reveal>
-                <div className="card-premium p-8">
+                <div className="card-premium p-8 rounded-2xl border border-gold-300/30 bg-white">
                   <h2 className="font-devanagari text-2xl font-bold text-maroon-800 mb-2" lang="hi">
                     यह परामर्श किनके लिए उपयुक्त है?
                   </h2>
                   <p className="text-xs text-saffron-600 font-semibold uppercase tracking-wider mb-6">
-                    Who Should Consider This
+                    Who Should Consider This Consultation
                   </p>
                   <div className="grid gap-3 sm:grid-cols-2">
                     {service.whoShouldConsider.map((item, idx) => (
@@ -165,7 +201,7 @@ export function ServiceDetailPage() {
 
               {/* What is included */}
               <Reveal>
-                <div className="card-premium p-8">
+                <div className="card-premium p-8 rounded-2xl border border-gold-300/30 bg-white">
                   <h2 className="font-devanagari text-2xl font-bold text-maroon-800 mb-2" lang="hi">
                     इस परामर्श में क्या शामिल है?
                   </h2>
@@ -175,7 +211,7 @@ export function ServiceDetailPage() {
                   <div className="space-y-3">
                     {service.whatIsIncluded.map((item, idx) => (
                       <div key={idx} className="flex items-start gap-3 border-b border-maroon-50 pb-3 last:border-0 last:pb-0">
-                        <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-gold-100 text-gold-700 text-xs font-bold">
+                        <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-gold-100 text-gold-800 text-xs font-bold">
                           {idx + 1}
                         </span>
                         <span className="text-sm leading-relaxed text-navy-800" lang="hi">
@@ -189,7 +225,7 @@ export function ServiceDetailPage() {
 
               {/* How it works */}
               <Reveal>
-                <div className="card-premium p-8">
+                <div className="card-premium p-8 rounded-2xl border border-gold-300/30 bg-white">
                   <h2 className="font-devanagari text-2xl font-bold text-maroon-800 mb-2" lang="hi">
                     परामर्श की प्रक्रिया
                   </h2>
@@ -198,8 +234,8 @@ export function ServiceDetailPage() {
                   </p>
                   <div className="grid gap-4 sm:grid-cols-2">
                     {service.howItWorks.map((step, idx) => (
-                      <div key={idx} className="rounded-xl border border-maroon-100/60 p-4">
-                        <span className="text-xs font-bold text-saffron-600">चरण 0{idx + 1}</span>
+                      <div key={idx} className="rounded-xl border border-gold-200/60 bg-cream-50/50 p-4">
+                        <span className="text-xs font-bold text-maroon-700">चरण 0{idx + 1}</span>
                         <p className="mt-1 text-sm font-medium text-navy-800" lang="hi">
                           {step}
                         </p>
@@ -211,12 +247,12 @@ export function ServiceDetailPage() {
 
               {/* Benefits */}
               <Reveal>
-                <div className="card-premium p-8">
+                <div className="card-premium p-8 rounded-2xl border border-gold-300/30 bg-white">
                   <h2 className="font-devanagari text-2xl font-bold text-maroon-800 mb-2" lang="hi">
-                    परामर्श से मिलने वाले लाभ एवं मार्गदर्शन
+                    परामर्श से मिलने वाले लाभ एवं स्पष्टता
                   </h2>
                   <p className="text-xs text-saffron-600 font-semibold uppercase tracking-wider mb-6">
-                    Key Benefits & Guidance Areas
+                    Key Benefits & Clarity
                   </p>
                   <div className="grid gap-3 sm:grid-cols-2">
                     {service.benefits.map((benefit, idx) => (
@@ -234,7 +270,7 @@ export function ServiceDetailPage() {
               {/* Service FAQ */}
               {service.faq && service.faq.length > 0 && (
                 <Reveal>
-                  <div className="card-premium p-8">
+                  <div className="card-premium p-8 rounded-2xl border border-gold-300/30 bg-white">
                     <h2 className="font-devanagari text-2xl font-bold text-maroon-800 mb-6" lang="hi">
                       इस सेवा से संबंधित प्रश्न-उत्तर
                     </h2>
@@ -247,7 +283,7 @@ export function ServiceDetailPage() {
             {/* Right 1 Col: Sticky Sidebar */}
             <div className="space-y-6">
               {/* Quick Booking Box */}
-              <div className="card-premium sticky top-24 p-6 shadow-card">
+              <div className="card-premium sticky top-24 p-6 shadow-card rounded-2xl border border-gold-300/30 bg-white">
                 <h3 className="font-devanagari text-xl font-bold text-maroon-800" lang="hi">
                   यह परामर्श प्राप्त करें
                 </h3>
@@ -260,7 +296,7 @@ export function ServiceDetailPage() {
                     href={waServiceLink(service.title)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-whatsapp w-full text-center text-sm"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-white shadow-soft transition-all hover:bg-[#1da851]"
                   >
                     <MessageCircle className="h-4 w-4" />
                     <span lang="hi">WhatsApp पर पूछें</span>
@@ -270,7 +306,7 @@ export function ServiceDetailPage() {
                     className="btn-primary w-full text-center text-sm"
                   >
                     <Calendar className="h-4 w-4" />
-                    <span lang="hi">अपॉइंटमेंट फॉर्म भरें</span>
+                    <span lang="hi">परामर्श फॉर्म भरें</span>
                   </Link>
                 </div>
 

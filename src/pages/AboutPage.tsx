@@ -1,27 +1,27 @@
 import { Link } from 'react-router-dom';
-import { Shield, Heart, Award, Compass, Eye, Target, Calendar, CheckCircle2 } from 'lucide-react';
+import { Shield, Heart, Award, Compass, Eye, Target, Calendar, CheckCircle2, Sparkles } from 'lucide-react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Reveal } from '@/components/ui/Reveal';
-import { StatsSection } from '@/components/sections/StatsSection';
 import { CTASection } from '@/components/sections/CTASection';
 import { siteConfig } from '@/data/siteConfig';
+import { valuePillars } from '@/data/content';
 
 const values = [
   {
-    title: 'विश्वास',
-    titleEn: 'Trust',
-    description: 'ग्राहकों का अटूट विश्वास हमारी सबसे बड़ी पूँजी है। हम सत्यनिष्ठ और प्रमाणिक परामर्श देने के लिए प्रतिबद्ध हैं।',
+    title: 'सत्यनिष्ठा एवं विश्वास',
+    titleEn: 'Trust & Authenticity',
+    description: 'ग्राहकों का विश्वास हमारी सबसे बड़ी पूँजी है। हम सत्यनिष्ठ और शास्त्रीय दृष्टि से प्रामाणिक परामर्श देने के लिए प्रतिबद्ध हैं।',
     icon: Shield,
   },
   {
-    title: 'गोपनीयता',
-    titleEn: 'Confidentiality',
+    title: 'पूर्ण गोपनीयता',
+    titleEn: '100% Confidentiality',
     description: 'आपकी जन्म कुंडली, व्यक्तिगत प्रश्न और पारिवारिक जानकारी पूर्ण रूप से सुरक्षित और गोपनीय रखी जाती है।',
     icon: Shield,
   },
   {
-    title: 'परंपरा',
-    titleEn: 'Tradition',
+    title: 'वैदिक परंपरा',
+    titleEn: 'Vedic Tradition',
     description: 'महर्षि पराशर, वराहमिहिर और महर्षि जैमिनी के कालजयी वैदिक सिद्धांतों और शास्त्रीय गणनाओं पर आधारित अध्ययन।',
     icon: Award,
   },
@@ -43,22 +43,22 @@ const timelineSteps = [
   {
     badge: 'पहला चरण',
     title: 'वैदिक ज्ञान परंपरा का अध्ययन',
-    description: 'गुरुकुल और प्राचीन ग्रन्थों के गहन स्वाध्याय द्वारा ज्योतिष के मूल सिद्धांतों और गणना पद्धतियों में दक्षता प्राप्त की गई।',
+    description: 'प्राचीन ग्रन्थों और पंचांग गणना के गहन स्वाध्याय द्वारा ज्योतिष के मूल सिद्धांतों और गणना पद्धतियों में निरंतर दक्षता।',
   },
   {
     badge: 'दूसरा चरण',
     title: 'संस्थान की स्थापना एवं मार्गदर्शन',
-    description: 'समाज के लोगों को जीवन के कठिन मोड़ों पर प्रामाणिक और निष्पक्ष ज्योतिषीय सलाह देने के उद्देश्य से संगम ज्योतिष संस्थान की नींव रखी गई।',
+    description: 'समाज के लोगों को जीवन के कठिन मोड़ों पर प्रामाणिक और निष्पक्ष ज्योतिषीय सलाह देने के उद्देश्य से संगम ज्योतिष संस्थान की स्थापना।',
   },
   {
     badge: 'तीसरा चरण',
-    title: 'हजारों परिवारों का विश्वास',
-    description: 'कुंडली विश्लेषण, विवाह मिलान, करियर एवं व्यापार ज्योतिष के माध्यम से 5000+ से अधिक जातकों को सही दिशा दिखाई गई।',
+    title: 'पारिवारिक एवं व्यक्तिगत विश्वास',
+    description: 'कुंडली विश्लेषण, विवाह मिलान, करियर एवं व्यापार ज्योतिष के माध्यम से अनेक परिवारों को सही दिशा और मार्गदर्शन।',
   },
   {
     badge: 'वर्तमान एवं भविष्य',
-    title: 'डिजिटल परामर्श एवं वैश्विक पहुंच',
-    description: 'आधुनिक तकनीक और WhatsApp के माध्यम से देश-विदेश में बसे लोगों तक पारंपरिक वैदिक ज्ञान को सुलभ बनाया जा रहा है।',
+    title: 'डिजिटल परामर्श एवं सुलभ पहुंच',
+    description: 'आधुनिक तकनीक, फोन कॉल और WhatsApp के माध्यम से देश-विदेश में बसे लोगों तक पारंपरिक वैदिक ज्ञान को सुलभ बनाना।',
   },
 ];
 
@@ -66,25 +66,25 @@ export function AboutPage() {
   return (
     <div className="bg-cream-50">
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-maroon-900 via-maroon-800 to-navy-900 py-20 text-cream-100 lg:py-28">
+      <section className="relative overflow-hidden bg-gradient-to-br from-maroon-950 via-maroon-900 to-navy-950 py-20 text-cream-100 lg:py-28">
         <div className="starfield absolute inset-0 opacity-30" aria-hidden />
         <div className="pointer-events-none absolute -right-20 top-1/2 -translate-y-1/2 rounded-full bg-gold-400/10 blur-3xl w-96 h-96" />
         
         <div className="container-px relative text-center">
           <div className="animate-fade-in inline-flex items-center gap-2 rounded-full border border-gold-400/30 bg-gold-400/10 px-4 py-1.5 text-sm text-gold-200 backdrop-blur-sm">
-            <span>✦</span>
+            <span className="text-gold-300">✦</span>
             <span lang="hi">हमारे बारे में</span>
-            <span>✦</span>
+            <span className="text-gold-300">✦</span>
           </div>
 
-          <h1 className="mt-6 font-devanagari text-4xl font-bold tracking-tight text-cream-50 sm:text-5xl lg:text-6xl" lang="hi">
+          <h1 className="mt-6 font-devanagari text-4xl font-bold leading-[1.35] text-cream-50 sm:text-5xl sm:leading-[1.4] lg:text-6xl lg:leading-[1.35]" lang="hi">
             {siteConfig.brandNameHindi}
           </h1>
           <p className="mx-auto mt-4 max-w-2xl font-display text-xl text-gold-300 sm:text-2xl" lang="hi">
             "{siteConfig.tagline}"
           </p>
           <p className="mx-auto mt-5 max-w-2xl text-base text-cream-100/85 sm:text-lg" lang="hi">
-            संगम ज्योतिष संस्थान एक प्रामाणिक वैदिक ज्योतिष परामर्श संस्थान है, जो भारतीय ज्योतिष परंपरा के शास्त्रीय सिद्धांतों के आधार पर जीवन के सभी क्षेत्रों में विश्वसनीय मार्गदर्शन प्रदान करता है।
+            संगम ज्योतिष संस्थान एक प्रामाणिक वैदिक ज्योतिष परामर्श संस्थान है, जो भारतीय ज्योतिष परंपरा के शास्त्रीय सिद्धांतों के आधार पर जीवन के सभी क्षेत्रों में व्यक्तिगत एवं विश्वसनीय मार्गदर्शन प्रदान करता है।
           </p>
         </div>
       </section>
@@ -95,22 +95,22 @@ export function AboutPage() {
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <Reveal>
               <div className="relative">
-                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-maroon-800 to-navy-950 p-8 shadow-card text-cream-50">
+                <div className="relative overflow-hidden rounded-3xl border border-gold-400/20 bg-gradient-to-br from-maroon-900 to-navy-950 p-8 shadow-card text-cream-50">
                   <div className="starfield absolute inset-0 opacity-20" aria-hidden />
                   <div className="relative">
-                    <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gold-400/20 text-gold-300">
+                    <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gold-400/20 text-gold-300 ring-2 ring-gold-400/30">
                       <span className="font-devanagari text-4xl">ॐ</span>
                     </div>
                     <h3 className="font-devanagari text-2xl font-bold" lang="hi">
                       परंपरागत ज्योतिष ज्ञान, आधुनिक समझ के साथ
                     </h3>
                     <p className="mt-4 text-base leading-relaxed text-cream-100/85" lang="hi">
-                      ज्योतिष केवल भविष्य जानने का साधन नहीं, बल्कि आत्म-ज्ञान और सही कर्म के चयन का प्रकाशस्तंभ है।
+                      ज्योतिष केवल भविष्य जानने का साधन नहीं, बल्कि आत्म-ज्ञान, संभावनाओं की समझ और सही कर्म के चयन का प्रकाशस्तंभ है।
                     </p>
                     <div className="mt-6 space-y-3 border-t border-maroon-700/60 pt-6 text-sm text-cream-100/80">
                       <div className="flex items-center gap-3">
                         <CheckCircle2 className="h-5 w-5 text-gold-400 flex-shrink-0" />
-                        <span lang="hi">शास्त्रीय पराशरीय एवं जैमिनी ज्योतिष पद्धति</span>
+                        <span lang="hi">शास्त्रीय पराशरीय एवं वैदिक ज्योतिष पद्धति</span>
                       </div>
                       <div className="flex items-center gap-3">
                         <CheckCircle2 className="h-5 w-5 text-gold-400 flex-shrink-0" />
@@ -134,12 +134,12 @@ export function AboutPage() {
               />
               <Reveal delay={100}>
                 <p className="mt-6 text-base leading-relaxed text-navy-700" lang="hi">
-                  हमारा मानना है कि प्रत्येक जातक का जन्म एक निश्चित ग्रह योग और प्रारब्ध के अनुसार होता है। जब कोई व्यक्ति करियर, विवाह, स्वास्थ्य या व्यवसाय में अनिश्चितता या संकट का सामना करता है, तो वैदिक ज्योतिष उसकी जन्म कुंडली के माध्यम से उसके अनुकूल और प्रतिकूल समय की सटीक पहचान कराता है।
+                  हमारा मानना है कि प्रत्येक जातक का जन्म एक निश्चित ग्रह योग और प्रारब्ध के अनुसार होता है। जब कोई व्यक्ति करियर, विवाह, संबंध, वित्त या व्यवसाय में अनिश्चितता का सामना करता है, तो वैदिक ज्योतिष उसकी जन्म कुंडली के माध्यम से उसके अनुकूल और प्रतिकूल समय की सटीक पहचान कराता है।
                 </p>
               </Reveal>
               <Reveal delay={200}>
                 <p className="mt-4 text-base leading-relaxed text-navy-700" lang="hi">
-                  संगम ज्योतिष संस्थान में हम किसी भी प्रकार के काल्पनिक दावे, अंधविश्वास या भय का सहारा नहीं लेते। हमारा सम्पूर्ण परामर्श प्रामाणिक ग्रन्थों के आधार पर और जातक के सर्वांगीण कल्याण को ध्यान में रखकर दिया जाता है।
+                  संगम ज्योतिष संस्थान में हम किसी भी प्रकार के काल्पनिक दावे, अंधविश्वास या भय का सहारा नहीं लेते। हमारा सम्पूर्ण परामर्श प्रामाणिक ग्रन्थों के आधार पर और जातक के वास्तविक कल्याण को ध्यान में रखकर दिया जाता है।
                 </p>
               </Reveal>
               <Reveal delay={300}>
@@ -169,8 +169,8 @@ export function AboutPage() {
 
           <div className="mt-12 grid gap-8 md:grid-cols-2">
             <Reveal delay={100}>
-              <div className="card-premium h-full p-8 relative overflow-hidden">
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-maroon-600 to-maroon-800 text-gold-300 shadow-soft">
+              <div className="card-premium h-full p-8 relative overflow-hidden rounded-2xl border border-gold-300/30">
+                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-maroon-700 to-maroon-900 text-gold-300 shadow-soft">
                   <Target className="h-7 w-7" />
                 </div>
                 <h3 className="font-devanagari text-2xl font-bold text-maroon-800" lang="hi">
@@ -183,15 +183,15 @@ export function AboutPage() {
             </Reveal>
 
             <Reveal delay={200}>
-              <div className="card-premium h-full p-8 relative overflow-hidden">
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-saffron-500 to-maroon-700 text-gold-300 shadow-soft">
+              <div className="card-premium h-full p-8 relative overflow-hidden rounded-2xl border border-gold-300/30">
+                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-saffron-600 to-maroon-800 text-gold-300 shadow-soft">
                   <Eye className="h-7 w-7" />
                 </div>
                 <h3 className="font-devanagari text-2xl font-bold text-maroon-800" lang="hi">
                   हमारा विज़न (Our Vision)
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-navy-700" lang="hi">
-                  भारत और वैश्विक स्तर पर एक ऐसा प्रतिष्ठित वैदिक ज्योतिष केंद्र बनना जो अपनी विश्वसनीयता, प्रामाणिकता, वैज्ञानिक दृष्टिकोण और मानवीय संवेदना के लिए जाना जाए।
+                  एक ऐसा प्रतिष्ठित एवं विश्वसनीय वैदिक ज्योतिष केंद्र बनना जो अपनी सत्यनिष्ठा, प्रामाणिक गणना, व्यक्तिगत संवेदनशीलता और पारदर्शी मार्गदर्शन के लिए जाना जाए।
                 </p>
               </div>
             </Reveal>
@@ -205,7 +205,7 @@ export function AboutPage() {
           <SectionHeading
             label="हमारे मूल्य"
             title="जिन सिद्धांतों पर हम कार्य करते हैं"
-            subtitle="संगम ज्योतिष संस्थान के 5 मूल स्तंभ जो हमारे हर परामर्श का आधार हैं"
+            subtitle="संगम ज्योतिष संस्थान के मूल स्तंभ जो हमारे हर परामर्श का आधार हैं"
           />
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -213,14 +213,14 @@ export function AboutPage() {
               const Icon = v.icon;
               return (
                 <Reveal key={v.title} delay={i * 80}>
-                  <div className="card-premium h-full p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-card">
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-maroon-50 text-maroon-700">
+                  <div className="card-premium h-full p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-card rounded-2xl border border-gold-300/30 bg-white">
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gold-400/10 text-maroon-700 ring-1 ring-gold-400/20">
                       <Icon className="h-6 w-6" />
                     </div>
                     <h3 className="font-devanagari text-xl font-bold text-maroon-800" lang="hi">
                       {v.title}
                     </h3>
-                    <p className="text-xs font-semibold text-saffron-600 mb-2">
+                    <p className="text-xs font-semibold text-saffron-700 mb-2">
                       {v.titleEn}
                     </p>
                     <p className="text-sm leading-relaxed text-navy-600" lang="hi">
@@ -235,12 +235,12 @@ export function AboutPage() {
       </section>
 
       {/* Visual Timeline */}
-      <section className="section-pad bg-cream-100/40">
+      <section className="section-pad bg-cream-100/40 border-y border-gold-200/30">
         <div className="container-px">
           <SectionHeading
             label="हमारी यात्रा"
             title="संस्थान की निरंतर प्रगति"
-            subtitle="वैदिक परंपरा से डिजिटल परामर्श तक का सफर"
+            subtitle="वैदिक परंपरा से डिजिटल परामर्श तक का निरंतर सफर"
           />
 
           <div className="relative mt-14 max-w-4xl mx-auto">
@@ -257,7 +257,7 @@ export function AboutPage() {
 
                     {/* Content Box */}
                     <div className="ml-10 sm:ml-0 sm:w-1/2 sm:px-8">
-                      <div className="card-premium p-6 shadow-soft">
+                      <div className="card-premium p-6 shadow-soft rounded-2xl border border-gold-300/30 bg-white">
                         <span className="inline-block rounded-full bg-maroon-50 px-3 py-1 text-xs font-semibold text-maroon-700 mb-2">
                           {step.badge}
                         </span>
@@ -277,8 +277,40 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <StatsSection />
+      {/* Value Pillars Banner */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-maroon-950 via-maroon-900 to-navy-950 py-16 text-cream-50">
+        <div className="starfield absolute inset-0 opacity-30" aria-hidden />
+        <div className="container-px relative">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <h3 className="font-devanagari text-2xl font-bold text-cream-50" lang="hi">
+              हमारी मुख्य प्रतिबद्धताएं
+            </h3>
+            <p className="text-sm text-gold-300/90 mt-2" lang="hi">
+              प्रत्येक परामर्श में शुद्धता, प्रामाणिकता और गोपनीयता की गारंटी
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {valuePillars.map((p, i) => (
+              <Reveal key={p.title} delay={i * 80}>
+                <div className="rounded-2xl border border-gold-400/20 bg-white/5 p-5 backdrop-blur-sm text-center">
+                  <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-gold-400/20 text-gold-300">
+                    <Sparkles className="h-5 w-5" />
+                  </div>
+                  <h4 className="font-devanagari text-base font-bold text-cream-50" lang="hi">
+                    {p.title}
+                  </h4>
+                  <p className="text-xs font-semibold text-gold-300 mt-0.5">
+                    {p.subtitle}
+                  </p>
+                  <p className="text-xs text-cream-100/75 mt-2 leading-relaxed" lang="hi">
+                    {p.description}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* CTA */}
       <CTASection

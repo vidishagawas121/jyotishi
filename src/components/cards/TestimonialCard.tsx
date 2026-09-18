@@ -1,4 +1,4 @@
-import { Star, Quote } from 'lucide-react';
+import { Quote } from 'lucide-react';
 import type { Testimonial } from '@/data/testimonials';
 import { Reveal } from '@/components/ui/Reveal';
 
@@ -10,25 +10,32 @@ interface TestimonialCardProps {
 export function TestimonialCard({ testimonial, index = 0 }: TestimonialCardProps) {
   return (
     <Reveal delay={index * 80}>
-      <div className="card-premium flex h-full flex-col p-6 hover:-translate-y-1 hover:shadow-card">
-        <div className="mb-3 flex items-center justify-between">
-          <div className="flex gap-0.5">
-            {Array.from({ length: testimonial.rating }).map((_, i) => (
-              <Star key={i} className="h-4 w-4 fill-gold-400 text-gold-400" />
-            ))}
+      <div className="card-premium flex h-full flex-col justify-between rounded-2xl border border-gold-300/30 bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-gold-400 hover:shadow-hover">
+        <div>
+          <div className="mb-4 flex items-center justify-between">
+            <span className="rounded-full bg-gold-400/10 px-3 py-1 text-xs font-semibold text-maroon-800 border border-gold-400/20">
+              {testimonial.service}
+            </span>
+            <Quote className="h-6 w-6 text-gold-400/40" />
           </div>
-          <Quote className="h-8 w-8 text-maroon-100" />
+
+          <p className="text-sm leading-relaxed text-navy-700 italic" lang="hi">
+            "{testimonial.review}"
+          </p>
         </div>
-        <p className="flex-1 text-sm leading-relaxed text-navy-700" lang="hi">
-          "{testimonial.review}"
-        </p>
-        <div className="mt-5 border-t border-maroon-50 pt-4">
-          <p className="font-devanagari font-bold text-maroon-800" lang="hi">
-            {testimonial.name}
-          </p>
-          <p className="text-xs text-navy-500" lang="hi">
-            {testimonial.city} · {testimonial.service}
-          </p>
+
+        <div className="mt-6 border-t border-cream-200 pt-4 flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-maroon-700 to-navy-900 text-gold-300 font-devanagari font-bold text-sm">
+            ॐ
+          </div>
+          <div>
+            <p className="font-devanagari font-bold text-sm text-maroon-900" lang="hi">
+              {testimonial.name}
+            </p>
+            <p className="text-xs text-navy-500" lang="hi">
+              {testimonial.city}
+            </p>
+          </div>
         </div>
       </div>
     </Reveal>

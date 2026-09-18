@@ -1,17 +1,16 @@
 import { useState } from 'react';
 import { services } from '@/data/services';
 import { ServiceCard } from '@/components/cards/ServiceCard';
-import { SectionHeading } from '@/components/ui/SectionHeading';
 import { ProcessSection } from '@/components/sections/ProcessSection';
 import { CTASection } from '@/components/sections/CTASection';
 import { Sparkles } from 'lucide-react';
 
 const categories = [
   { id: 'all', label: 'सभी सेवाएं' },
-  { id: 'kundli', label: 'कुंडली एवं विवाह' },
-  { id: 'career', label: 'करियर एवं व्यापार' },
-  { id: 'vastu-puja', label: 'वास्तु एवं अनुष्ठान' },
-  { id: 'special', label: 'मुहूर्त एवं रत्न' },
+  { id: 'kundli', label: 'कुंडली, विवाह एवं संबंध' },
+  { id: 'career-business', label: 'करियर, व्यापार एवं वित्त' },
+  { id: 'vastu-spiritual', label: 'वास्तु एवं आध्यात्मिक' },
+  { id: 'muhurat-special', label: 'मुहूर्त, प्रश्न एवं रत्न' },
 ];
 
 export function ServicesPage() {
@@ -20,16 +19,16 @@ export function ServicesPage() {
   const filteredServices = services.filter((service) => {
     if (activeCategory === 'all') return true;
     if (activeCategory === 'kundli') {
-      return ['kundli-analysis', 'marriage-kundli', 'love-relationship', 'santanam-astrology'].includes(service.slug);
+      return ['marriage-kundli', 'love-relationship', 'kundli-analysis', 'santan'].includes(service.slug);
     }
-    if (activeCategory === 'career') {
-      return ['career-guidance', 'business-consultation', 'wealth-financial'].includes(service.slug);
+    if (activeCategory === 'career-business') {
+      return ['career', 'business', 'dhan-vittiya'].includes(service.slug);
     }
-    if (activeCategory === 'vastu-puja') {
-      return ['vastu-consultation', 'graha-shanti'].includes(service.slug);
+    if (activeCategory === 'vastu-spiritual') {
+      return ['vastu', 'graha-shanti'].includes(service.slug);
     }
-    if (activeCategory === 'special') {
-      return ['prashna-kundli', 'gemstone-consultation', 'muhurat-consultation'].includes(service.slug);
+    if (activeCategory === 'muhurat-special') {
+      return ['muhurat', 'prashna-kundli', 'ratna-paramarsh'].includes(service.slug);
     }
     return true;
   });
@@ -37,25 +36,25 @@ export function ServicesPage() {
   return (
     <div className="bg-cream-50">
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-maroon-900 via-maroon-800 to-navy-900 py-20 text-cream-100 lg:py-28">
+      <section className="relative overflow-hidden bg-gradient-to-br from-maroon-900 via-maroon-800 to-navy-950 py-20 text-cream-100 lg:py-28">
         <div className="starfield absolute inset-0 opacity-30" aria-hidden />
         <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold-400/10 blur-3xl w-[500px] h-[500px]" />
 
         <div className="container-px relative text-center">
           <div className="animate-fade-in inline-flex items-center gap-2 rounded-full border border-gold-400/30 bg-gold-400/10 px-4 py-1.5 text-sm text-gold-200 backdrop-blur-sm">
             <Sparkles className="h-4 w-4 text-gold-300" />
-            <span lang="hi">वैदिक सेवाएं</span>
+            <span lang="hi">वैदिक ज्योतिष सेवाएं</span>
             <Sparkles className="h-4 w-4 text-gold-300" />
           </div>
 
-          <h1 className="mt-6 font-devanagari text-4xl font-bold tracking-tight text-cream-50 sm:text-5xl lg:text-6xl" lang="hi">
+          <h1 className="mt-6 font-devanagari text-4xl font-bold leading-[1.35] text-cream-50 sm:text-5xl sm:leading-[1.4] lg:text-6xl lg:leading-[1.35]" lang="hi">
             हमारी ज्योतिष सेवाएं
           </h1>
           <p className="mx-auto mt-4 max-w-2xl font-display text-lg text-gold-300 sm:text-xl" lang="hi">
-            जीवन के महत्वपूर्ण क्षेत्रों में वैदिक ज्योतिष आधारित मार्गदर्शन
+            जीवन के विभिन्न क्षेत्रों से जुड़े प्रश्नों के लिए व्यक्तिगत ज्योतिषीय मार्गदर्शन
           </p>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-cream-100/80 sm:text-base" lang="hi">
-            कुंडली मिलान, करियर, व्यापार, वास्तु और ग्रह शांति सहित 12 विशिष्ट क्षेत्रों में प्रामाणिक और व्यक्तिगत परामर्श उपलब्ध है।
+            विवाह, संबंध, करियर, व्यापार, धन, वास्तु और ग्रह शांति सहित विशिष्ट क्षेत्रों में शास्त्रीय एवं प्रामाणिक वैदिक परामर्श उपलब्ध है।
           </p>
         </div>
       </section>
@@ -71,8 +70,8 @@ export function ServicesPage() {
                 onClick={() => setActiveCategory(cat.id)}
                 className={`rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-300 ${
                   activeCategory === cat.id
-                    ? 'bg-maroon-700 text-cream-50 shadow-soft scale-105'
-                    : 'bg-white text-navy-700 hover:bg-maroon-50 border border-maroon-100/80'
+                    ? 'bg-maroon-700 text-cream-50 shadow-soft scale-105 ring-2 ring-gold-400/30'
+                    : 'bg-white text-navy-700 hover:bg-maroon-50 border border-gold-200/50'
                 }`}
                 lang="hi"
               >
@@ -95,8 +94,8 @@ export function ServicesPage() {
 
       {/* CTA */}
       <CTASection
-        title="किस सेवा के लिए परामर्श चाहते हैं?"
-        subtitle="सीधे WhatsApp पर संपर्क करें अथवा विस्तृत परामर्श के लिए अपॉइंटमेंट बुक करें।"
+        title="अपने प्रश्नों के लिए ज्योतिषीय परामर्श लें"
+        subtitle="अपने जीवन से जुड़े महत्वपूर्ण प्रश्नों पर व्यक्तिगत मार्गदर्शन प्राप्त करने के लिए हमसे संपर्क करें।"
       />
     </div>
   );

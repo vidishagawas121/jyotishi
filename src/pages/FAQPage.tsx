@@ -29,7 +29,7 @@ export function FAQPage() {
             <HelpCircle className="h-4 w-4 text-gold-300" />
           </div>
 
-          <h1 className="mt-6 font-devanagari text-4xl font-bold tracking-tight text-cream-50 sm:text-5xl lg:text-6xl" lang="hi">
+          <h1 className="mt-6 font-devanagari text-4xl font-bold leading-[1.35] text-cream-50 sm:text-5xl sm:leading-[1.4] lg:text-6xl lg:leading-[1.35]" lang="hi">
             अक्सर पूछे जाने वाले प्रश्न
           </h1>
           <p className="mx-auto mt-4 max-w-2xl font-display text-lg text-gold-300 sm:text-xl" lang="hi">
