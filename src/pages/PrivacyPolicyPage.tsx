@@ -86,7 +86,7 @@ export function PrivacyPolicyPage() {
               <div className="mt-4 rounded-xl bg-cream-100/70 p-4 text-sm text-navy-800 space-y-1">
                 <p><strong>संस्थान:</strong> संगम ज्योतिष संस्थान (Sangam Jyotish Sansthan)</p>
                 <p><strong>हेल्पलाइन:</strong> {siteConfig.phone}</p>
-                <p><strong>WhatsApp:</strong> +91 9422425501</p>
+                <p><strong>WhatsApp:</strong> +91 7800224400</p>
               </div>
             </div>
           </div>
