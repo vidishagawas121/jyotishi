@@ -174,7 +174,14 @@ export function Footer() {
           <p>© 2026 Sangam Jyotish Sansthan. All Rights Reserved.</p>
           <p className="text-center text-cream-100/75">
             Designed & Developed by{' '}
-            <span className="font-semibold text-gold-400">Fourise Software Solutions Pvt. Ltd Pune</span>
+            <a
+              href="https://fouriseindia.com/contact"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-gold-400 transition-colors hover:text-gold-300 hover:underline"
+            >
+              Fourise Software Solutions Pvt. Ltd Pune
+            </a>
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link to="/privacy-policy" className="transition-colors hover:text-gold-300">Privacy Policy</Link>
