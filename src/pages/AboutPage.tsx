@@ -3,6 +3,7 @@ import { Shield, Heart, Award, Compass, Eye, Target, Calendar, CheckCircle2, Spa
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Reveal } from '@/components/ui/Reveal';
 import { CTASection } from '@/components/sections/CTASection';
+import { SEO } from '@/components/ui/SEO';
 import { siteConfig } from '@/data/siteConfig';
 import { valuePillars } from '@/data/content';
 
@@ -65,6 +66,11 @@ const timelineSteps = [
 export function AboutPage() {
   return (
     <div className="bg-cream-50">
+      <SEO
+        title="हमारे बारे में | संगम ज्योतिष संस्थान की परंपरा एवं मूल्य"
+        description="संगम ज्योतिष संस्थान की वैदिक ज्योतिष परंपरा, प्रामाणिक दृष्टिकोण, अनुभव और समाज सेवा के संकल्प के बारे में जानें।"
+        canonical="/about"
+      />
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-maroon-950 via-maroon-900 to-navy-950 py-20 text-cream-100 lg:py-28">
         <div className="starfield absolute inset-0 opacity-30" aria-hidden />

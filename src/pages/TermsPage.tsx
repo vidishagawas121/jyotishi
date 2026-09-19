@@ -1,9 +1,15 @@
 import { Scale } from 'lucide-react';
 import { siteConfig } from '@/data/siteConfig';
+import { SEO } from '@/components/ui/SEO';
 
 export function TermsPage() {
   return (
     <div className="bg-cream-50">
+      <SEO
+        title="नियम एवं शर्तें (Terms & Conditions) | संगम ज्योतिष संस्थान"
+        description="संगम ज्योतिष संस्थान के नियम एवं शर्तें — सेवा का स्वरूप, जन्म विवरण की सटीकता, परामर्श एवं सेवा उपयोग की नियमावली।"
+        canonical="/terms"
+      />
       {/* Header */}
       <section className="relative overflow-hidden bg-gradient-to-br from-maroon-900 via-maroon-800 to-navy-900 py-16 text-cream-100 lg:py-20">
         <div className="starfield absolute inset-0 opacity-30" aria-hidden />

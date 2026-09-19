@@ -13,7 +13,7 @@ export function AstrologersPreview() {
           title="हमारे ज्योतिष विशेषज्ञ"
           subtitle="अनुभवी विशेषज्ञों से व्यक्तिगत ज्योतिषीय मार्गदर्शन प्राप्त करें।"
         />
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {astrologers.map((astrologer, i) => (
             <AstrologerCard key={astrologer.id} astrologer={astrologer} index={i} />
           ))}

@@ -3,6 +3,7 @@ import { faqs } from '@/data/content';
 import { FAQAccordion } from '@/components/sections/FAQAccordion';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { CTASection } from '@/components/sections/CTASection';
+import { SEO } from '@/components/ui/SEO';
 import { HelpCircle, Search, MessageCircle } from 'lucide-react';
 import { waGeneral } from '@/lib/whatsapp';
 
@@ -17,6 +18,11 @@ export function FAQPage() {
 
   return (
     <div className="bg-cream-50">
+      <SEO
+        title="अक्सर पूछे जाने वाले प्रश्न (FAQ) | संगम ज्योतिष संस्थान"
+        description="ज्योतिष परामर्श, प्रक्रिया, कुंडली विश्लेषण, जन्म समय की उपलब्धता और गोपनीयता से संबंधित अक्सर पूछे जाने वाले प्रश्नों के उत्तर।"
+        canonical="/faq"
+      />
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-maroon-900 via-maroon-800 to-navy-900 py-20 text-cream-100 lg:py-28">
         <div className="starfield absolute inset-0 opacity-30" aria-hidden />

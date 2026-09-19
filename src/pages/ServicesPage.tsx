@@ -3,6 +3,7 @@ import { services } from '@/data/services';
 import { ServiceCard } from '@/components/cards/ServiceCard';
 import { ProcessSection } from '@/components/sections/ProcessSection';
 import { CTASection } from '@/components/sections/CTASection';
+import { SEO } from '@/components/ui/SEO';
 import { Sparkles } from 'lucide-react';
 
 const categories = [
@@ -35,6 +36,11 @@ export function ServicesPage() {
 
   return (
     <div className="bg-cream-50">
+      <SEO
+        title="हमारी ज्योतिष सेवाएं | वैदिक ज्योतिष परामर्श"
+        description="विवाह, कुंडली मिलान, प्रेम व संबंध, करियर, व्यापार, वित्त, वास्तु एवं ग्रह शांति सहित संपूर्ण वैदिक ज्योतिष सेवाएं।"
+        canonical="/services"
+      />
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-maroon-900 via-maroon-800 to-navy-950 py-20 text-cream-100 lg:py-28">
         <div className="starfield absolute inset-0 opacity-30" aria-hidden />

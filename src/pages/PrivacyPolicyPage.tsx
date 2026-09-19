@@ -1,9 +1,15 @@
 import { Shield } from 'lucide-react';
 import { siteConfig } from '@/data/siteConfig';
+import { SEO } from '@/components/ui/SEO';
 
 export function PrivacyPolicyPage() {
   return (
     <div className="bg-cream-50">
+      <SEO
+        title="गोपनीयता नीति (Privacy Policy) | संगम ज्योतिष संस्थान"
+        description="संगम ज्योतिष संस्थान की गोपनीयता नीति — आपकी कुंडली, जन्म विवरण, संपर्क जानकारी और परामर्श की पूर्ण गोपनीयता।"
+        canonical="/privacy-policy"
+      />
       {/* Header */}
       <section className="relative overflow-hidden bg-gradient-to-br from-maroon-900 via-maroon-800 to-navy-900 py-16 text-cream-100 lg:py-20">
         <div className="starfield absolute inset-0 opacity-30" aria-hidden />

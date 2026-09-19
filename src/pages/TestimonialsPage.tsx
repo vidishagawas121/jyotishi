@@ -3,6 +3,7 @@ import { testimonials } from '@/data/testimonials';
 import { TestimonialCard } from '@/components/cards/TestimonialCard';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { CTASection } from '@/components/sections/CTASection';
+import { SEO } from '@/components/ui/SEO';
 import { MessageSquareQuote, Star, ShieldCheck, Sparkles } from 'lucide-react';
 import { waGeneral } from '@/lib/whatsapp';
 
@@ -18,6 +19,11 @@ export function TestimonialsPage() {
 
   return (
     <div className="bg-cream-50">
+      <SEO
+        title="परामर्श अनुभव एवं समीक्षाएं | संगम ज्योतिष संस्थान"
+        description="संगम ज्योतिष संस्थान के ज्योतिषीय परामर्श से संतुष्ट जातकों के वास्तविक अनुभव और समीक्षाएं पढ़ें।"
+        canonical="/testimonials"
+      />
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-maroon-950 via-maroon-900 to-navy-950 py-20 text-cream-100 lg:py-28">
         <div className="starfield absolute inset-0 opacity-30" aria-hidden />

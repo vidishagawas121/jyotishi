@@ -3,6 +3,7 @@ import { astrologers, astrologerFilters } from '@/data/astrologers';
 import { AstrologerCard } from '@/components/cards/AstrologerCard';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { CTASection } from '@/components/sections/CTASection';
+import { SEO } from '@/components/ui/SEO';
 import { Users, ShieldCheck, HeartHandshake, Sparkles } from 'lucide-react';
 import { Reveal } from '@/components/ui/Reveal';
 
@@ -18,6 +19,11 @@ export function AstrologersPage() {
 
   return (
     <div className="bg-cream-50">
+      <SEO
+        title="हमारे ज्योतिषाचार्य | वैदिक ज्योतिष विशेषज्ञ"
+        description="संगम ज्योतिष संस्थान के अनुभवी एवं विद्वान ज्योतिषाचार्यों से मिलें और अपनी कुंडली के अनुसार व्यक्तिगत परामर्श प्राप्त करें।"
+        canonical="/astrologers"
+      />
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-maroon-950 via-maroon-900 to-navy-950 py-20 text-cream-100 lg:py-28">
         <div className="starfield absolute inset-0 opacity-30" aria-hidden />
@@ -64,7 +70,7 @@ export function AstrologersPage() {
           </div>
 
           {/* Cards Grid */}
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {filteredAstrologers.map((astrologer, index) => (
               <AstrologerCard key={astrologer.id} astrologer={astrologer} index={index} />
             ))}

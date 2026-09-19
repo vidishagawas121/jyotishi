@@ -3,10 +3,16 @@ import { Phone, Mail, MapPin, MessageCircle, Clock, Shield } from 'lucide-react'
 import { siteConfig } from '@/data/siteConfig';
 import { waGeneral } from '@/lib/whatsapp';
 import { Reveal } from '@/components/ui/Reveal';
+import { SEO } from '@/components/ui/SEO';
 
 export function ContactPage() {
   return (
     <div className="bg-cream-50">
+      <SEO
+        title="संपर्क करें | संगम ज्योतिष संस्थान"
+        description="संगम ज्योतिष संस्थान से फोन, WhatsApp या ऑनलाइन फॉर्म के माध्यम से सीधे संपर्क करें और ज्योतिषीय परामर्श प्राप्त करें।"
+        canonical="/contact"
+      />
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-maroon-900 via-maroon-800 to-navy-900 py-20 text-cream-100 lg:py-28">
         <div className="starfield absolute inset-0 opacity-30" aria-hidden />

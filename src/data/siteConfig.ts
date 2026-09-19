@@ -1,20 +1,23 @@
+import { env } from '@/env';
+
 export const siteConfig = {
   brandName: 'Sangam Jyotish Sansthan',
   brandNameHindi: 'संगम ज्योतिष संस्थान',
   tagline: 'वैदिक ज्ञान से जीवन को सही दिशा',
   altTagline: 'प्राचीन ज्योतिष ज्ञान, आधुनिक मार्गदर्शन',
-  phone: '+91 7800224400',
-  phoneRaw: '+917800224400',
-  whatsappNumber: '917800224400',
-  whatsappUrl: 'https://wa.me/917800224400',
-  telUrl: 'tel:+917800224400',
-  email: '[EMAIL TO BE PROVIDED]',
-  address: '[ADDRESS TO BE PROVIDED]',
+  phone: env.phone,
+  phoneRaw: env.phoneRaw,
+  whatsappNumber: env.whatsappNumber,
+  whatsappUrl: env.whatsappUrl,
+  telUrl: env.telUrl,
+  email: env.email,
+  address: env.address,
+  siteUrl: env.siteUrl,
   social: {
-    whatsapp: 'https://wa.me/917800224400',
-    facebook: '#',
-    instagram: '#',
-    youtube: '#',
+    whatsapp: env.whatsappUrl,
+    facebook: env.facebookUrl || '#',
+    instagram: env.instagramUrl || '#',
+    youtube: env.youtubeUrl || '#',
   },
 } as const;
 

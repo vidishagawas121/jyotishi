@@ -5,6 +5,7 @@ import { waServiceLink } from '@/lib/whatsapp';
 import { FAQAccordion } from '@/components/sections/FAQAccordion';
 import { CTASection } from '@/components/sections/CTASection';
 import { Reveal } from '@/components/ui/Reveal';
+import { SEO } from '@/components/ui/SEO';
 import { 
   ChevronRight, 
   CheckCircle, 
@@ -33,6 +34,22 @@ export function ServiceDetailPage() {
 
   return (
     <div className="bg-cream-50">
+      <SEO
+        title={`${service.title} (${service.titleEn})`}
+        description={service.shortDescription}
+        canonical={`/services/${service.slug}`}
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'Service',
+          name: service.title,
+          alternateName: service.titleEn,
+          description: service.shortDescription,
+          provider: {
+            '@type': 'ProfessionalService',
+            name: 'Sangam Jyotish Sansthan',
+          },
+        }}
+      />
       {/* Breadcrumb & Top Bar */}
       <div className="border-b border-maroon-100/60 bg-cream-100/50 py-3 text-xs sm:text-sm">
         <div className="container-px flex items-center gap-2 text-navy-600">

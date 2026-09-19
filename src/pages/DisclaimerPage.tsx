@@ -1,9 +1,15 @@
 import { AlertTriangle, ShieldCheck } from 'lucide-react';
 import { siteConfig } from '@/data/siteConfig';
+import { SEO } from '@/components/ui/SEO';
 
 export function DisclaimerPage() {
   return (
     <div className="bg-cream-50">
+      <SEO
+        title="अस्वीकरण (Disclaimer) | संगम ज्योतिष संस्थान"
+        description="संगम ज्योतिष संस्थान का अस्वीकरण — नैतिक, अंधविश्वास-मुक्त, और प्रामाणिक वैदिक ज्योतिष परामर्श का स्पष्टीकरण।"
+        canonical="/disclaimer"
+      />
       {/* Header */}
       <section className="relative overflow-hidden bg-gradient-to-br from-maroon-900 via-maroon-800 to-navy-900 py-16 text-cream-100 lg:py-20">
         <div className="starfield absolute inset-0 opacity-30" aria-hidden />

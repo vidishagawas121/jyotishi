@@ -1,0 +1,18 @@
+{
+  "name": "संगम ज्योतिष संस्थान | Sangam Jyotish Sansthan",
+  "short_name": "संगम ज्योतिष",
+  "description": "प्रामाणिक वैदिक ज्योतिष परामर्श, कुंडली विश्लेषण, विवाह, करियर, व्यापार, वित्त एवं वास्तु सेवाएं।",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#420917",
+  "theme_color": "#420917",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

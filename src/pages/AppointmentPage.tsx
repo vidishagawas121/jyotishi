@@ -3,10 +3,16 @@ import { Calendar, Phone, ShieldCheck, Clock, CheckCircle2, MessageCircle } from
 import { siteConfig } from '@/data/siteConfig';
 import { waAppointment } from '@/lib/whatsapp';
 import { Reveal } from '@/components/ui/Reveal';
+import { SEO } from '@/components/ui/SEO';
 
 export function AppointmentPage() {
   return (
     <div className="bg-cream-50">
+      <SEO
+        title="ज्योतिष परामर्श अपॉइंटमेंट बुक करें"
+        description="संगम ज्योतिष संस्थान में ऑनलाइन व ऑफलाइन व्यक्तिगत ज्योतिष परामर्श के लिए अपॉइंटमेंट बुक करें।"
+        canonical="/appointment"
+      />
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-maroon-900 via-maroon-800 to-navy-900 py-16 text-cream-100 lg:py-24">
         <div className="starfield absolute inset-0 opacity-30" aria-hidden />

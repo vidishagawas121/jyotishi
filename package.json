@@ -1,7 +1,8 @@
 {
-  "name": "vite-react-typescript-starter",
+  "name": "sangam-jyotish-sansthan",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Authentic Vedic Astrology Consultation Web Application for Sangam Jyotish Sansthan",
   "type": "module",
   "scripts": {
     "dev": "vite",
