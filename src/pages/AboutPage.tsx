@@ -4,6 +4,7 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Reveal } from '@/components/ui/Reveal';
 import { CTASection } from '@/components/sections/CTASection';
 import { SEO } from '@/components/ui/SEO';
+import { KundliChartSection } from '@/components/ui/KundliChartSection';
 import { siteConfig } from '@/data/siteConfig';
 import { valuePillars } from '@/data/content';
 
@@ -161,6 +162,15 @@ export function AboutPage() {
               </Reveal>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Vedic Kundli 12 Houses Showcase */}
+      <section className="section-pad bg-cream-100/50">
+        <div className="container-px">
+          <Reveal>
+            <KundliChartSection />
+          </Reveal>
         </div>
       </section>
 

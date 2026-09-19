@@ -6,6 +6,7 @@ import { FAQAccordion } from '@/components/sections/FAQAccordion';
 import { CTASection } from '@/components/sections/CTASection';
 import { Reveal } from '@/components/ui/Reveal';
 import { SEO } from '@/components/ui/SEO';
+import { KundliChartSection } from '@/components/ui/KundliChartSection';
 import { 
   ChevronRight, 
   CheckCircle, 
@@ -166,6 +167,13 @@ export function ServiceDetailPage() {
                   </p>
                 </div>
               </Reveal>
+
+              {/* Kundli Chart Visual Diagram (Featured for Kundli Analysis and Astrology services) */}
+              {(service.slug === 'kundli-analysis' || service.slug === 'marriage-kundli' || service.slug === 'career') && (
+                <Reveal>
+                  <KundliChartSection />
+                </Reveal>
+              )}
 
               {/* Topics Covered */}
               {service.topicsCovered && service.topicsCovered.length > 0 && (
