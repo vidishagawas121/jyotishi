@@ -2,6 +2,7 @@ import { HeroSection } from '@/components/sections/HeroSection';
 import { ProblemCategoriesSection } from '@/components/sections/ProblemCategoriesSection';
 import { AboutPreview } from '@/components/sections/AboutPreview';
 import { ServicesSection } from '@/components/sections/ServicesSection';
+import { KundliAnalysisFeature } from '@/components/sections/KundliAnalysisFeature';
 import { WhyChooseUs } from '@/components/sections/WhyChooseUs';
 import { ProcessSection } from '@/components/sections/ProcessSection';
 import { AstrologersPreview } from '@/components/sections/AstrologersPreview';
@@ -22,6 +23,7 @@ export function HomePage() {
       <ProblemCategoriesSection />
       <AboutPreview />
       <ServicesSection />
+      <KundliAnalysisFeature />
       <WhyChooseUs />
       <ProcessSection />
       <AstrologersPreview />
