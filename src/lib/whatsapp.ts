@@ -7,7 +7,17 @@ export const waLink = (message?: string): string => {
 };
 
 export const waGeneral = waLink(
-  'नमस्ते, मुझे संगम ज्योतिष संस्थान से ज्योतिष परामर्श लेना है।'
+  `नमस्ते संगम ज्योतिष संस्थान,
+मुझे ज्योतिष परामर्श चाहिए।
+
+नाम: 
+मोबाइल: 
+लिंग: 
+जन्म तिथि: 
+जन्म समय: 
+जन्म स्थान: 
+ईमेल: 
+प्रश्न: `
 );
 
 export const waAppointment = waLink(
