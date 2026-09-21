@@ -1,18 +1,15 @@
 import { useState, type FormEvent } from 'react';
 import { Send, Calendar } from 'lucide-react';
 import { siteConfig } from '@/data/siteConfig';
-import { services } from '@/data/services';
 
 const initialForm = {
   name: '',
   mobile: '',
-  whatsapp: '',
+  gender: '',
   dob: '',
   tob: '',
   pob: '',
-  service: '',
-  prefDate: '',
-  prefTime: '',
+  email: '',
   question: '',
 };
 
@@ -27,17 +24,15 @@ export function AppointmentForm() {
 
   const buildMessage = () =>
     `नमस्ते संगम ज्योतिष संस्थान,
-मैं ज्योतिष परामर्श के लिए अपॉइंटमेंट बुक करना चाहता/चाहती हूँ।
+मुझे ज्योतिष परामर्श चाहिए।
 
 नाम: ${form.name}
 मोबाइल: ${form.mobile}
-WhatsApp: ${form.whatsapp}
+लिंग: ${form.gender}
 जन्म तिथि: ${form.dob}
 जन्म समय: ${form.tob}
 जन्म स्थान: ${form.pob}
-सेवा: ${form.service}
-पसंदीदा तिथि: ${form.prefDate}
-पसंदीदा समय: ${form.prefTime}
+ईमेल: ${form.email}
 प्रश्न: ${form.question}`;
 
   const handleSubmit = (e: FormEvent) => {
@@ -59,22 +54,43 @@ WhatsApp: ${form.whatsapp}
           <label className="mb-1.5 block text-sm font-medium text-navy-700" lang="hi">
             नाम <span className="text-maroon-500">*</span>
           </label>
-          <input type="text" name="name" required value={form.name} onChange={handleChange} className={inputClass} placeholder="आपका नाम" />
+          <input
+            type="text"
+            name="name"
+            required
+            value={form.name}
+            onChange={handleChange}
+            className={inputClass}
+            placeholder="आपका नाम"
+          />
         </div>
         <div>
           <label className="mb-1.5 block text-sm font-medium text-navy-700" lang="hi">
-            मोबाइल नंबर <span className="text-maroon-500">*</span>
+            मोबाइल <span className="text-maroon-500">*</span>
           </label>
-          <input type="tel" name="mobile" required value={form.mobile} onChange={handleChange} className={inputClass} placeholder="+91 XXXXX XXXXX" />
+          <input
+            type="tel"
+            name="mobile"
+            required
+            value={form.mobile}
+            onChange={handleChange}
+            className={inputClass}
+            placeholder="+91 XXXXX XXXXX"
+          />
         </div>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-3">
         <div>
           <label className="mb-1.5 block text-sm font-medium text-navy-700" lang="hi">
-            WhatsApp नंबर
+            लिंग
           </label>
-          <input type="tel" name="whatsapp" value={form.whatsapp} onChange={handleChange} className={inputClass} placeholder="+91 XXXXX XXXXX" />
+          <select name="gender" value={form.gender} onChange={handleChange} className={inputClass}>
+            <option value="">चुनें</option>
+            <option value="पुरुष">पुरुष</option>
+            <option value="महिला">महिला</option>
+            <option value="अन्य">अन्य</option>
+          </select>
         </div>
         <div>
           <label className="mb-1.5 block text-sm font-medium text-navy-700" lang="hi">
@@ -82,58 +98,55 @@ WhatsApp: ${form.whatsapp}
           </label>
           <input type="date" name="dob" value={form.dob} onChange={handleChange} className={inputClass} />
         </div>
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label className="mb-1.5 block text-sm font-medium text-navy-700" lang="hi">
             जन्म समय
           </label>
           <input type="time" name="tob" value={form.tob} onChange={handleChange} className={inputClass} />
         </div>
-        <div>
-          <label className="mb-1.5 block text-sm font-medium text-navy-700" lang="hi">
-            जन्म स्थान
-          </label>
-          <input type="text" name="pob" value={form.pob} onChange={handleChange} className={inputClass} placeholder="जन्म का शहर" />
-        </div>
-      </div>
-
-      <div>
-        <label className="mb-1.5 block text-sm font-medium text-navy-700" lang="hi">
-          सेवा चुनें <span className="text-maroon-500">*</span>
-        </label>
-        <select name="service" required value={form.service} onChange={handleChange} className={inputClass}>
-          <option value="">सेवा चुनें</option>
-          {services.map((s) => (
-            <option key={s.slug} value={s.title}>
-              {s.title} — {s.titleEn}
-            </option>
-          ))}
-          <option value="अन्य">अन्य</option>
-        </select>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label className="mb-1.5 block text-sm font-medium text-navy-700" lang="hi">
-            पसंदीदा तिथि
+            जन्म स्थान
           </label>
-          <input type="date" name="prefDate" value={form.prefDate} onChange={handleChange} className={inputClass} />
+          <input
+            type="text"
+            name="pob"
+            value={form.pob}
+            onChange={handleChange}
+            className={inputClass}
+            placeholder="जन्म का शहर"
+          />
         </div>
         <div>
           <label className="mb-1.5 block text-sm font-medium text-navy-700" lang="hi">
-            पसंदीदा समय
+            ईमेल
           </label>
-          <input type="time" name="prefTime" value={form.prefTime} onChange={handleChange} className={inputClass} />
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            className={inputClass}
+            placeholder="your@email.com"
+          />
         </div>
       </div>
 
       <div>
         <label className="mb-1.5 block text-sm font-medium text-navy-700" lang="hi">
-          आपका प्रश्न
+          प्रश्न
         </label>
-        <textarea name="question" rows={4} value={form.question} onChange={handleChange} className={inputClass} placeholder="अपना प्रश्न या आवश्यकता यहाँ लिखें..." />
+        <textarea
+          name="question"
+          rows={4}
+          value={form.question}
+          onChange={handleChange}
+          className={inputClass}
+          placeholder="अपना प्रश्न या आवश्यकता यहाँ लिखें..."
+        />
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row">
