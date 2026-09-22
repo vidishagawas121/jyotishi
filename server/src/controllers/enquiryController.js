@@ -1,4 +1,5 @@
 import { Enquiry } from '../models/Enquiry.js';
+import { connectDB } from '../config/db.js';
 
 /**
  * Helper to compute period boundaries based on Indian Standard Time / Local Time
@@ -31,6 +32,7 @@ function getPeriodDateRange(period) {
  */
 export async function createEnquiry(req, res) {
   try {
+    await connectDB();
     const {
       name,
       phone,
@@ -98,6 +100,7 @@ export async function createEnquiry(req, res) {
  */
 export async function getEnquiries(req, res) {
   try {
+    await connectDB();
     const { search, status, type, period, limit = 200, skip = 0 } = req.query;
 
     const query = {};
@@ -160,6 +163,7 @@ export async function getEnquiries(req, res) {
  */
 export async function getStats(req, res) {
   try {
+    await connectDB();
     const now = new Date();
 
     // Start of Today
@@ -235,6 +239,7 @@ export async function getStats(req, res) {
  */
 export async function getEnquiryById(req, res) {
   try {
+    await connectDB();
     const enquiry = await Enquiry.findById(req.params.id);
     if (!enquiry) {
       return res.status(404).json({
@@ -261,6 +266,7 @@ export async function getEnquiryById(req, res) {
  */
 export async function updateEnquiry(req, res) {
   try {
+    await connectDB();
     const { status, adminNotes } = req.body;
     const updateFields = {};
 
@@ -299,6 +305,7 @@ export async function updateEnquiry(req, res) {
  */
 export async function deleteEnquiry(req, res) {
   try {
+    await connectDB();
     const enquiry = await Enquiry.findByIdAndDelete(req.params.id);
 
     if (!enquiry) {

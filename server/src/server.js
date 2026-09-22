@@ -14,6 +14,7 @@ import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import mongoose from 'mongoose';
 import { connectDB } from './config/db.js';
 import enquiryRoutes from './routes/enquiryRoutes.js';
 
@@ -57,25 +58,39 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
+// Database connection middleware for serverless requests (must be before routes)
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+  } catch (err) {
+    console.warn('DB connect middleware error:', err);
+  }
+  next();
+});
+
 // Health check endpoint
-app.get('/api/health', (req, res) => {
+app.get(['/api/health', '/health'], async (req, res) => {
+  const isConnected = mongoose.connection.readyState === 1;
   res.json({
     status: 'ok',
     service: 'Sangam Jyotish Sansthan Backend API',
-    database: 'MongoDB Atlas',
+    database: isConnected ? 'Connected (MongoDB Atlas)' : 'Connecting / Disconnected',
+    readyState: mongoose.connection.readyState,
+    hasMongoUri: Boolean(process.env.MONGODB_URI),
     timestamp: new Date().toISOString(),
   });
 });
 
-// API Routes
+// API Routes (support both /api/enquiries and rewritten /enquiries)
 app.use('/api/enquiries', enquiryRoutes);
+app.use('/enquiries', enquiryRoutes);
 
 // In production, serve frontend client build if client/dist exists
 const clientDistPath = path.join(__dirname, '../../client/dist');
 if (fs.existsSync(clientDistPath)) {
   app.use(express.static(clientDistPath));
   app.get('*', (req, res, next) => {
-    if (req.originalUrl.startsWith('/api')) {
+    if (req.originalUrl.startsWith('/api') || req.originalUrl.startsWith('/enquiries')) {
       return next();
     }
     res.sendFile(path.join(clientDistPath, 'index.html'));
@@ -88,7 +103,7 @@ if (fs.existsSync(clientDistPath)) {
 }
 
 // 404 Handler for unhandled API routes
-app.use('/api/*', (req, res) => {
+app.use(['/api/*', '/enquiries/*'], (req, res) => {
   res.status(404).json({
     success: false,
     message: `API मार्ग नहीं मिला (API route not found: ${req.originalUrl})`,
@@ -101,17 +116,9 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).json({
     success: false,
     message: process.env.NODE_ENV === 'production' 
-      ? 'आंतरिक सर्वर त्रुटि (Internal Server Error)' 
+      ? 'आंतरिक सर्वर त्रुटि (Internal Server Error): ' + err.message
       : err.message || 'आंतरिक सर्वर त्रुटि',
   });
-});
-
-// Ensure database is connected for API requests
-app.use(async (req, res, next) => {
-  if (req.path.startsWith('/api')) {
-    await connectDB();
-  }
-  next();
 });
 
 // Start listening only when not in serverless (e.g., local dev or persistent container)

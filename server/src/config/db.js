@@ -1,11 +1,13 @@
 import mongoose from 'mongoose';
 import dns from 'dns';
 
-// Fix for Windows / Node.js querySrv ECONNREFUSED by resolving through Google / Cloudflare DNS
-try {
-  dns.setServers(['8.8.8.8', '1.1.1.1', '8.8.4.4']);
-} catch (e) {
-  // Ignore DNS config errors in serverless environments
+// Fix for Windows / local DNS resolution for SRV records
+if (process.platform === 'win32') {
+  try {
+    dns.setServers(['8.8.8.8', '1.1.1.1', '8.8.4.4']);
+  } catch (e) {
+    // Ignore DNS config note
+  }
 }
 
 // Global cached connection for serverless execution
@@ -23,14 +25,13 @@ export async function connectDB() {
     return null;
   }
 
-  if (cached.conn) {
+  if (cached.conn && mongoose.connection.readyState === 1) {
     return cached.conn;
   }
 
   if (!cached.promise) {
     const opts = {
-      serverSelectionTimeoutMS: 8000,
-      bufferCommands: false,
+      serverSelectionTimeoutMS: 10000,
     };
 
     cached.promise = mongoose.connect(uri, opts).then((mongooseInstance) => {
@@ -44,8 +45,10 @@ export async function connectDB() {
     return cached.conn;
   } catch (error) {
     cached.promise = null;
+    cached.conn = null;
     console.error(`⚠️ MongoDB Atlas Connection Error: ${error.message}`);
     return null;
   }
 }
+
 
