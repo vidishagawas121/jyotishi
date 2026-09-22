@@ -52,6 +52,13 @@ export function AdminDashboardPage({ onLogout }: AdminDashboardPageProps) {
   useEffect(() => {
     loadData();
 
+    // Auto-refresh when tab is focused
+    const handleFocus = () => loadData();
+    window.addEventListener('focus', handleFocus);
+
+    // Auto-poll every 10 seconds for new customer bookings
+    const intervalId = setInterval(loadData, 10000);
+
     // Listen to real-time events across windows/tabs
     const handleCreated = () => loadData();
     const handleUpdated = () => loadData();
@@ -64,6 +71,8 @@ export function AdminDashboardPage({ onLogout }: AdminDashboardPageProps) {
     window.addEventListener('enquiry_reset', handleReset);
 
     return () => {
+      window.removeEventListener('focus', handleFocus);
+      clearInterval(intervalId);
       window.removeEventListener('enquiry_created', handleCreated);
       window.removeEventListener('enquiry_updated', handleUpdated);
       window.removeEventListener('enquiry_deleted', handleDeleted);

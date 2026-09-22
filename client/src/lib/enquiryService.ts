@@ -171,7 +171,7 @@ export async function getEnquiries(): Promise<Enquiry[]> {
 }
 
 /**
- * Save a new enquiry (Backend MongoDB Atlas -> Supabase -> Local Storage)
+ * Save a new enquiry (Backend MongoDB Atlas -> Local Cache)
  */
 export async function saveEnquiry(
   payload: Omit<Enquiry, 'id' | 'status' | 'createdAt' | 'updatedAt'> & {
@@ -180,10 +180,11 @@ export async function saveEnquiry(
   }
 ): Promise<Enquiry> {
   const now = new Date().toISOString();
-  const newEnquiry: Enquiry = {
-    id: payload.id || generateEnquiryId(),
+  const fallbackId = payload.id || generateEnquiryId();
+
+  const bodyData = {
     name: payload.name.trim(),
-    mobile: payload.mobile.trim(),
+    phone: payload.mobile.trim(),
     email: payload.email?.trim() || '',
     gender: payload.gender || '',
     dob: payload.dob || '',
@@ -193,53 +194,57 @@ export async function saveEnquiry(
     type: payload.type,
     status: payload.status || 'new',
     adminNotes: payload.adminNotes || '',
-    createdAt: now,
-    updatedAt: now,
     source: payload.source || (payload.type === 'appointment' ? 'अपॉइंटमेंट फॉर्म' : 'संपर्क फॉर्म'),
   };
 
-  // 1. Save to local storage for immediate optimistic UI
-  try {
-    const list = await getEnquiries();
-    const updated = [newEnquiry, ...list.filter((item) => item.id !== newEnquiry.id)];
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-  } catch (err) {
-    console.error('Error saving to localStorage:', err);
-  }
+  let assignedId = fallbackId;
 
-  // 2. Save to Backend MongoDB Atlas API
+  // 1. Save directly to Backend MongoDB Atlas API
   try {
     const apiResult = await fetchApi<any>('/enquiries', {
       method: 'POST',
-      body: JSON.stringify({
-        name: newEnquiry.name,
-        phone: newEnquiry.mobile,
-        email: newEnquiry.email,
-        gender: newEnquiry.gender,
-        dob: newEnquiry.dob,
-        tob: newEnquiry.tob,
-        pob: newEnquiry.pob,
-        question: newEnquiry.question,
-        type: newEnquiry.type,
-        status: newEnquiry.status,
-        adminNotes: newEnquiry.adminNotes,
-        source: newEnquiry.source,
-      }),
+      body: JSON.stringify(bodyData),
     });
     if (apiResult && (apiResult.id || apiResult._id)) {
-      newEnquiry.id = apiResult.id || apiResult._id;
+      assignedId = apiResult.id || apiResult._id;
     }
   } catch (err) {
-    console.warn('Backend API save failed (saved locally):', err);
+    console.warn('Backend API save warning:', err);
+  }
+
+  const newEnquiry: Enquiry = {
+    id: assignedId,
+    name: bodyData.name,
+    mobile: bodyData.phone,
+    email: bodyData.email,
+    gender: bodyData.gender,
+    dob: bodyData.dob,
+    tob: bodyData.tob,
+    pob: bodyData.pob,
+    question: bodyData.question,
+    type: bodyData.type,
+    status: bodyData.status,
+    adminNotes: bodyData.adminNotes,
+    createdAt: now,
+    updatedAt: now,
+    source: bodyData.source,
+  };
+
+  // 2. Cache in local storage
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    const list: Enquiry[] = raw ? JSON.parse(raw) : [];
+    const updated = [newEnquiry, ...list.filter((item) => item.id !== newEnquiry.id)];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+  } catch (err) {
+    // Ignore storage errors
   }
 
   // 3. Save to Supabase if connected
   if (supabase) {
     try {
       await supabase.from('enquiries').upsert(newEnquiry);
-    } catch (err) {
-      console.warn('Supabase sync error (cached locally):', err);
-    }
+    } catch (err) {}
   }
 
   // Trigger custom event so admin panel updates in real-time
