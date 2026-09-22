@@ -1,6 +1,8 @@
+import { env } from '@/env';
+
 const AUTH_KEY = 'sangam_admin_session_auth_v1';
 const PIN_KEY = 'sangam_admin_custom_pin_v1';
-const DEFAULT_PIN = 'admin123';
+const DEFAULT_PIN = env.adminPin || 'admin123';
 
 export function getStoredAdminPin(): string {
   if (typeof window === 'undefined') return DEFAULT_PIN;

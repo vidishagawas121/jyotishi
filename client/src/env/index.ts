@@ -19,6 +19,7 @@ export interface EnvConfig {
   supabaseUrl?: string;
   supabaseAnonKey?: string;
   apiBaseUrl: string;
+  adminPin: string;
   isDev: boolean;
   isProd: boolean;
 }
@@ -47,6 +48,7 @@ export const env: EnvConfig = {
   gaMeasurementId: getEnv('VITE_GA_MEASUREMENT_ID', ''),
   supabaseUrl: getEnv('VITE_SUPABASE_URL', ''),
   apiBaseUrl: getEnv('VITE_API_BASE_URL', import.meta.env.DEV ? 'http://localhost:5000/api' : '/api').replace(/\/$/, ''),
+  adminPin: getEnv('VITE_ADMIN_PIN', 'admin123'),
   isDev: import.meta.env.DEV,
   isProd: import.meta.env.PROD,
 };
