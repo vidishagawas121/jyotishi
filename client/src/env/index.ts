@@ -46,8 +46,7 @@ export const env: EnvConfig = {
   youtubeUrl: getEnv('VITE_YOUTUBE_URL', '#'),
   gaMeasurementId: getEnv('VITE_GA_MEASUREMENT_ID', ''),
   supabaseUrl: getEnv('VITE_SUPABASE_URL', ''),
-  supabaseAnonKey: getEnv('VITE_SUPABASE_ANON_KEY', ''),
-  apiBaseUrl: getEnv('VITE_API_BASE_URL', 'http://localhost:5000/api').replace(/\/$/, ''),
+  apiBaseUrl: getEnv('VITE_API_BASE_URL', import.meta.env.DEV ? 'http://localhost:5000/api' : '/api').replace(/\/$/, ''),
   isDev: import.meta.env.DEV,
   isProd: import.meta.env.PROD,
 };

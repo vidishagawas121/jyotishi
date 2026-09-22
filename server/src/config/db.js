@@ -5,7 +5,14 @@ import dns from 'dns';
 try {
   dns.setServers(['8.8.8.8', '1.1.1.1', '8.8.4.4']);
 } catch (e) {
-  console.warn('Could not set custom DNS servers:', e);
+  // Ignore DNS config errors in serverless environments
+}
+
+// Global cached connection for serverless execution
+let cached = global.mongoose;
+
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
 }
 
 export async function connectDB() {
@@ -16,29 +23,29 @@ export async function connectDB() {
     return null;
   }
 
-  try {
-    const conn = await mongoose.connect(uri, {
+  if (cached.conn) {
+    return cached.conn;
+  }
+
+  if (!cached.promise) {
+    const opts = {
       serverSelectionTimeoutMS: 8000,
-    });
+      bufferCommands: false,
+    };
 
-    console.log(`✅ MongoDB Atlas Connected: ${conn.connection.host} (DB: ${conn.connection.name})`);
-    
-    mongoose.connection.on('error', (err) => {
-      console.error(`❌ MongoDB connection runtime error:`, err);
+    cached.promise = mongoose.connect(uri, opts).then((mongooseInstance) => {
+      console.log(`✅ MongoDB Atlas Connected: ${mongooseInstance.connection.host} (DB: ${mongooseInstance.connection.name})`);
+      return mongooseInstance;
     });
+  }
 
-    mongoose.connection.on('disconnected', () => {
-      console.warn('⚠️ MongoDB connection lost. Attempting reconnect...');
-    });
-
-    mongoose.connection.on('reconnected', () => {
-      console.log('✅ MongoDB connection restored.');
-    });
-
-    return conn;
+  try {
+    cached.conn = await cached.promise;
+    return cached.conn;
   } catch (error) {
-    console.error(`⚠️ MongoDB Atlas Connection Note: ${error.message}`);
-    console.warn(`👉 The server is running and ready. Ensure your IP address is whitelisted in MongoDB Atlas Network Access (0.0.0.0/0).`);
+    cached.promise = null;
+    console.error(`⚠️ MongoDB Atlas Connection Error: ${error.message}`);
     return null;
   }
 }
+

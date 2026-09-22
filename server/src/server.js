@@ -106,21 +106,34 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Start listening
-const server = app.listen(PORT, () => {
-  console.log(`\n🕉️ =================================================`);
-  console.log(`🕉️ Sangam Jyotish API Server running on port ${PORT}`);
-  console.log(`🕉️ Local: http://localhost:${PORT}`);
-  console.log(`🕉️ Health: http://localhost:${PORT}/api/health`);
-  console.log(`🕉️ Enquiries API: http://localhost:${PORT}/api/enquiries`);
-  console.log(`🕉️ =================================================\n`);
+// Ensure database is connected for API requests
+app.use(async (req, res, next) => {
+  if (req.path.startsWith('/api')) {
+    await connectDB();
+  }
+  next();
 });
 
-// Handle graceful shutdown
-process.on('SIGINT', () => {
-  console.log('\nStopping server...');
-  server.close(() => {
-    console.log('Server terminated gracefully.');
-    process.exit(0);
+// Start listening only when not in serverless (e.g., local dev or persistent container)
+if (!process.env.VERCEL) {
+  const server = app.listen(PORT, () => {
+    console.log(`\n🕉️ =================================================`);
+    console.log(`🕉️ Sangam Jyotish API Server running on port ${PORT}`);
+    console.log(`🕉️ Local: http://localhost:${PORT}`);
+    console.log(`🕉️ Health: http://localhost:${PORT}/api/health`);
+    console.log(`🕉️ Enquiries API: http://localhost:${PORT}/api/enquiries`);
+    console.log(`🕉️ =================================================\n`);
   });
-});
+
+  // Handle graceful shutdown
+  process.on('SIGINT', () => {
+    console.log('\nStopping server...');
+    server.close(() => {
+      console.log('Server terminated gracefully.');
+      process.exit(0);
+    });
+  });
+}
+
+export default app;
+
