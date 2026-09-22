@@ -56,6 +56,11 @@ export function EnquiryDetailModal({
     setSavingNotes(false);
   };
 
+  const handleDeleteClick = async () => {
+    await onDelete(enquiry.id);
+    onClose();
+  };
+
   const handleCopy = () => {
     const summary = `संगम ज्योतिष पूछताछ
 ID: ${enquiry.id}
