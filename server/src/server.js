@@ -31,21 +31,13 @@ const PORT = process.env.PORT || 5000;
 // Connect to MongoDB Atlas
 connectDB();
 
-// CORS configuration
-const allowedOrigins = process.env.CORS_ORIGIN
-  ? process.env.CORS_ORIGIN.split(',').map((origin) => origin.trim())
-  : ['http://localhost:5173', 'http://localhost:3000', 'http://127.0.0.1:5173'];
-
+// CORS configuration (allow all origins, credentials, and standard methods)
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps, curl, Postman) or allowed list
-      if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes('*')) {
-        return callback(null, true);
-      }
-      return callback(null, true); // Permissive in dev to avoid CORS blocking
-    },
+    origin: true,
     credentials: true,
+    methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
   })
 );
 

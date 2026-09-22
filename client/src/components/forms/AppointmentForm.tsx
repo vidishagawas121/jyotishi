@@ -54,14 +54,15 @@ export function AppointmentForm() {
         source: 'वेबसाइट अपॉइंटमेंट फॉर्म',
       });
       setSubmitted(true);
+      const whatsappMsg = buildMessage();
+      setForm(initialForm);
+      // Open WhatsApp with pre-filled message
+      window.open(`${siteConfig.whatsappUrl}?text=${encodeURIComponent(whatsappMsg)}`, '_blank');
     } catch (err) {
       console.error('Failed to save enquiry:', err);
     } finally {
       setIsSubmitting(false);
     }
-
-    // Open WhatsApp
-    window.open(`${siteConfig.whatsappUrl}?text=${encodeURIComponent(buildMessage())}`, '_blank');
   };
 
   const handleSubmit = async (e: FormEvent) => {
