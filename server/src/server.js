@@ -22,11 +22,20 @@ import enquiryRoutes from './routes/enquiryRoutes.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Load server environment variables
-dotenv.config({ path: path.join(__dirname, '../.env') });
+// Load server environment variables (.env in server or workspace root)
+const serverEnv = path.join(__dirname, '../.env');
+const rootEnv = path.join(__dirname, '../../.env');
+if (fs.existsSync(serverEnv)) {
+  dotenv.config({ path: serverEnv });
+} else if (fs.existsSync(rootEnv)) {
+  dotenv.config({ path: rootEnv });
+} else {
+  dotenv.config();
+}
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+// Load port strictly from environment (.env or system PORT), fallback to 5000 if not specified
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 5000;
 
 // Connect to MongoDB Atlas
 connectDB();
