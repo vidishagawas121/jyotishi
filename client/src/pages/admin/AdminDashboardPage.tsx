@@ -6,7 +6,6 @@ import {
   saveEnquiry,
   calculateStats,
   exportEnquiriesToCSV,
-  resetSampleData,
   type Enquiry,
   type EnquiryStatus,
   type EnquiryType,
@@ -157,13 +156,6 @@ export function AdminDashboardPage({ onLogout }: AdminDashboardPageProps) {
     );
   };
 
-  const handleResetDemo = () => {
-    if (confirm('क्या आप डिफ़ॉल्ट सैंपल पूछताछ डेटा लोड करना चाहते हैं?')) {
-      const data = resetSampleData();
-      setEnquiries(data);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-cream-50/80 font-sans pb-16">
       <SEO title="व्यवस्थापक डैशबोर्ड | संगम ज्योतिष संस्थान" noindex={true} />
@@ -180,14 +172,14 @@ export function AdminDashboardPage({ onLogout }: AdminDashboardPageProps) {
               पूछताछ एवं अपॉइंटमेंट डैशबोर्ड
             </h1>
             <p className="text-xs text-navy-600 mt-0.5">
-              आज, सप्ताह, माह व वर्ष की ग्राहक पूछताछ का लाइव विश्लेषण एवं प्रबंधन
+              आज, सप्ताह, माह व वर्ष की ग्राहक पूछताछ का लाइव विश्लेषण एवं प्रबंधन (MongoDB Atlas)
             </p>
           </div>
 
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800 border border-emerald-200">
               <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              सिस्टम लाइव
+              MongoDB लाइव
             </span>
           </div>
         </div>
@@ -215,7 +207,6 @@ export function AdminDashboardPage({ onLogout }: AdminDashboardPageProps) {
             onExportCSV={handleExportCSV}
             onOpenManualModal={() => setShowManualModal(true)}
             onRefresh={loadData}
-            onResetDemoData={handleResetDemo}
             totalFilteredCount={filteredEnquiries.length}
           />
         </section>

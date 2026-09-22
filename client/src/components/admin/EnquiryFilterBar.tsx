@@ -13,7 +13,6 @@ interface EnquiryFilterBarProps {
   onExportCSV: () => void;
   onOpenManualModal: () => void;
   onRefresh: () => void;
-  onResetDemoData: () => void;
   totalFilteredCount: number;
 }
 
@@ -29,7 +28,6 @@ export function EnquiryFilterBar({
   onExportCSV,
   onOpenManualModal,
   onRefresh,
-  onResetDemoData,
   totalFilteredCount,
 }: EnquiryFilterBarProps) {
   const periodOptions = [
@@ -112,17 +110,9 @@ export function EnquiryFilterBar({
           <button
             onClick={onRefresh}
             className="rounded-xl border border-navy-200 bg-white p-2 text-navy-600 hover:bg-cream-100 hover:text-maroon-700 transition-colors"
-            title="डेटा रिफ्रेश करें"
+            title="MongoDB डेटा रिफ्रेश करें"
           >
             <RefreshCw className="h-4 w-4" />
-          </button>
-
-          <button
-            onClick={onResetDemoData}
-            className="rounded-xl border border-navy-200 bg-white p-2 text-navy-500 hover:bg-amber-50 hover:text-amber-800 transition-colors"
-            title="डेमो सैंपल डेटा लोड करें"
-          >
-            <RotateCcw className="h-4 w-4" />
           </button>
         </div>
       </div>

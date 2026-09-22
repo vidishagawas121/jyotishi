@@ -54,94 +54,8 @@ if (env.supabaseUrl && env.supabaseAnonKey) {
   }
 }
 
-// Initial sample inquiries to provide a rich out-of-the-box experience
-const SAMPLE_ENQUIRIES: Enquiry[] = [
-  {
-    id: 'ENQ-1001',
-    name: 'राजेश कुमार शर्मा',
-    mobile: '+91 98765 43210',
-    email: 'rajesh.sharma@example.com',
-    gender: 'पुरुष',
-    dob: '1992-08-15',
-    tob: '06:45',
-    pob: 'वाराणसी, उत्तर प्रदेश',
-    question: 'करियर में पदोन्नति और कार्यक्षेत्र परिवर्तन के योग कब तक बन रहे हैं? वर्तमान में काफी अवरोध आ रहे हैं।',
-    type: 'appointment',
-    status: 'new',
-    adminNotes: 'पहला संपर्क, करियर फलादेश एवं रत्न सुझाव की आवश्यकता।',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    source: 'वेबसाइट अपॉइंटमेंट फॉर्म',
-  },
-  {
-    id: 'ENQ-1002',
-    name: 'प्रिया एवं अमित वर्मा',
-    mobile: '+91 98112 34567',
-    email: 'priya.verma@example.com',
-    gender: 'महिला',
-    dob: '1996-11-22',
-    tob: '14:30',
-    pob: 'लखनऊ, उत्तर प्रदेश',
-    question: 'विवाह हेतु 36 गुण मिलान और मांगलिक दोष विचार कराना है। क्या गुण मिलान अनुकूल रहेगा?',
-    type: 'appointment',
-    status: 'contacted',
-    adminNotes: 'WhatsApp पर बात हुई, दोनों की कुंडलियां प्राप्त हो गई हैं।',
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 3).toISOString(), // 3 hours ago (Today)
-    updatedAt: new Date().toISOString(),
-    source: 'वेबसाइट अपॉइंटमेंट फॉर्म',
-  },
-  {
-    id: 'ENQ-1003',
-    name: 'सुनील गुप्ता',
-    mobile: '+91 97654 32109',
-    email: 'sunil.gupta@bizmail.com',
-    gender: 'पुरुष',
-    dob: '1985-03-10',
-    tob: '10:15',
-    pob: 'इंदौर, मध्य प्रदेश',
-    question: 'नया व्यापार आरंभ करने हेतु शुभ मुहूर्त एवं व्यापारिक वास्तु दोष का समाधान जानना चाहते हैं।',
-    type: 'contact',
-    status: 'in_progress',
-    adminNotes: 'व्यापारिक वास्तु लेआउट का अध्ययन जारी है।',
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2).toISOString(), // 2 days ago (This week)
-    updatedAt: new Date().toISOString(),
-    source: 'संपर्क फॉर्म',
-  },
-  {
-    id: 'ENQ-1004',
-    name: 'अनीता देशपांडे',
-    mobile: '+91 94230 12345',
-    email: 'anita.d@example.com',
-    gender: 'महिला',
-    dob: '1990-07-04',
-    tob: '18:20',
-    pob: 'पुणे, महाराष्ट्र',
-    question: 'शनि की साढ़े साती चल रही है, मानसिक अशांति एवं स्वास्थ्य कष्ट के निवारण हेतु नवग्रह शांति पूजा विधान।',
-    type: 'appointment',
-    status: 'completed',
-    adminNotes: 'परामर्श पूर्ण हुआ। नवग्रह शांति जप व सात्विक दान विधि बताई गई। जातक संतुष्ट।',
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 12).toISOString(), // 12 days ago (This month)
-    updatedAt: new Date().toISOString(),
-    source: 'वेबसाइट अपॉइंटमेंट फॉर्म',
-  },
-  {
-    id: 'ENQ-1005',
-    name: 'विकास मेहरा',
-    mobile: '+91 99887 76655',
-    email: 'vikas.mehra@company.com',
-    gender: 'पुरुष',
-    dob: '1988-12-30',
-    tob: '04:10',
-    pob: 'दिल्ली',
-    question: 'धन लाभ एवं अचल संपत्ति (मकान) खरीदने का शुभ समय व वित्तीय स्थिरता के ज्योतिषीय उपाय।',
-    type: 'contact',
-    status: 'completed',
-    adminNotes: 'चतुर्थ भाव एवं बृहस्पति गोचर के आधार पर संपत्ति क्रय मुहूर्त दिया गया।',
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 45).toISOString(), // 45 days ago (This year)
-    updatedAt: new Date().toISOString(),
-    source: 'संपर्क फॉर्म',
-  },
-];
+// Empty by default - only real enquiries from MongoDB Atlas
+const SAMPLE_ENQUIRIES: Enquiry[] = [];
 
 /**
  * Helper to generate unique human-readable enquiry IDs
@@ -156,12 +70,12 @@ export function generateEnquiryId(): string {
  * Helper to fetch from backend API with timeout and error handling
  */
 async function fetchApi<T>(endpoint: string, options: RequestInit = {}): Promise<T | null> {
-  if (!env.apiBaseUrl) return null;
+  const baseUrl = env.apiBaseUrl || (typeof window !== 'undefined' ? '/api' : '');
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 6000); // 6s timeout
+    const timeoutId = setTimeout(() => controller.abort(), 8000); // 8s timeout
 
-    const res = await fetch(`${env.apiBaseUrl}${endpoint}`, {
+    const res = await fetch(`${baseUrl}${endpoint}`, {
       ...options,
       headers: {
         'Content-Type': 'application/json',
@@ -180,7 +94,6 @@ async function fetchApi<T>(endpoint: string, options: RequestInit = {}): Promise
     const json = await res.json();
     return json.data !== undefined ? json.data : json;
   } catch (err) {
-    // Graceful offline fallback
     return null;
   }
 }
@@ -189,22 +102,9 @@ async function fetchApi<T>(endpoint: string, options: RequestInit = {}): Promise
  * Fetch all enquiries (Backend API MongoDB -> Supabase -> Local Storage)
  */
 export async function getEnquiries(): Promise<Enquiry[]> {
-  let localData: Enquiry[] = [];
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) {
-      localData = JSON.parse(raw);
-    } else {
-      localData = SAMPLE_ENQUIRIES;
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(localData));
-    }
-  } catch (e) {
-    localData = SAMPLE_ENQUIRIES;
-  }
-
-  // 1. Try Backend Express API (MongoDB Atlas)
+  // 1. Fetch from Backend Express API (MongoDB Atlas)
   const apiData = await fetchApi<any[]>('/enquiries');
-  if (apiData && Array.isArray(apiData) && apiData.length > 0) {
+  if (apiData !== null && Array.isArray(apiData)) {
     const normalized: Enquiry[] = apiData.map((item) => ({
       id: item.id || item._id,
       name: item.name,
@@ -223,7 +123,7 @@ export async function getEnquiries(): Promise<Enquiry[]> {
       source: item.source || 'Website Form',
     }));
 
-    // Cache locally
+    // Cache real data locally
     localStorage.setItem(STORAGE_KEY, JSON.stringify(normalized));
     return normalized;
   }
@@ -236,24 +136,38 @@ export async function getEnquiries(): Promise<Enquiry[]> {
         .select('*')
         .order('createdAt', { ascending: false });
 
-      if (!error && data && data.length > 0) {
-        const map = new Map<string, Enquiry>();
-        localData.forEach((item) => map.set(item.id, item));
-        data.forEach((item: Enquiry) => map.set(item.id, item));
-        const merged = Array.from(map.values()).sort(
-          (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-        );
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
-        return merged;
+      if (!error && data) {
+        const normalized = data.map((item: any) => ({
+          ...item,
+          mobile: item.mobile || item.phone || '',
+        }));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(normalized));
+        return normalized;
       }
     } catch (err) {
       console.warn('Supabase fetch failed, fallback to local storage:', err);
     }
   }
 
-  return localData.sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  );
+  // 3. Fallback to locally stored real enquiries (filtering out any old demo data)
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const parsed: Enquiry[] = JSON.parse(raw);
+      // Filter out legacy dummy entries
+      const cleanData = parsed.filter(
+        (item) => !['ENQ-1001', 'ENQ-1002', 'ENQ-1003', 'ENQ-1004', 'ENQ-1005'].includes(item.id)
+      );
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cleanData));
+      return cleanData.sort(
+        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
+    }
+  } catch (e) {
+    // Ignore JSON parse errors
+  }
+
+  return [];
 }
 
 /**
@@ -414,14 +328,14 @@ export async function deleteEnquiry(id: string): Promise<boolean> {
 }
 
 /**
- * Reset data to default sample set (helpful for admin preview/demo)
+ * Clear local cache
  */
 export function resetSampleData(): Enquiry[] {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(SAMPLE_ENQUIRIES));
+  localStorage.removeItem(STORAGE_KEY);
   if (typeof window !== 'undefined') {
     window.dispatchEvent(new CustomEvent('enquiry_reset'));
   }
-  return SAMPLE_ENQUIRIES;
+  return [];
 }
 
 /**
