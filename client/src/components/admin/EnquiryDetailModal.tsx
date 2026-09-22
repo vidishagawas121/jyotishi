@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import {
   X,
   Phone,
@@ -61,23 +62,25 @@ ID: ${enquiry.id}
 नाम: ${enquiry.name}
 मोबाइल: ${enquiry.mobile}
 ईमेल: ${enquiry.email || 'N/A'}
-जन्म विवरण: ${enquiry.dob || 'N/A'} | ${enquiry.tob || 'N/A'} | ${enquiry.pob || 'N/A'}
+जन्म दिनांक: ${enquiry.dob || 'N/A'}
+जन्म समय: ${enquiry.tob || 'N/A'}
+जन्म स्थान: ${enquiry.pob || 'N/A'}
 प्रश्न: ${enquiry.question}
-स्थिति: ${status}
-दिनांक: ${new Date(enquiry.createdAt).toLocaleString('hi-IN')}`;
+प्राप्त समय: ${new Date(enquiry.createdAt).toLocaleString('hi-IN')}`;
     navigator.clipboard.writeText(summary);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleDeleteClick = async () => {
-    await onDelete(enquiry.id);
-    onClose();
-  };
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+      {/* Backdrop */}
+      <div 
+        className="fixed inset-0 bg-navy-950/80 backdrop-blur-sm transition-opacity" 
+        onClick={onClose}
+      />
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-navy-950/70 p-4 backdrop-blur-xs animate-fade-in overflow-y-auto">
-      <div className="relative w-full max-w-2xl rounded-3xl border border-maroon-100 bg-white p-6 sm:p-8 shadow-2xl my-8 max-h-[90vh] overflow-y-auto">
+      <div className="relative w-full max-w-2xl rounded-3xl border border-maroon-100 bg-white p-6 sm:p-8 shadow-2xl z-10 my-8 max-h-[90vh] overflow-y-auto animate-fade-in">
         {/* Header */}
         <div className="flex items-start justify-between border-b border-navy-100 pb-4">
           <div>
@@ -284,6 +287,7 @@ ID: ${enquiry.id}
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

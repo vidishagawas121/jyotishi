@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react';
+import { createPortal } from 'react-dom';
 import { X, Plus, User, Phone, Calendar, Clock, MapPin, Mail, MessageSquare } from 'lucide-react';
 import type { EnquiryStatus, EnquiryType } from '@/lib/enquiryService';
 
@@ -66,9 +67,15 @@ export function ManualEnquiryModal({ isOpen, onClose, onSave }: ManualEnquiryMod
   const inputClass =
     'w-full rounded-xl border border-navy-200 bg-cream-50/50 px-3.5 py-2 text-xs text-navy-900 focus:border-maroon-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-maroon-100';
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-navy-950/70 p-4 backdrop-blur-xs animate-fade-in overflow-y-auto">
-      <div className="relative w-full max-w-xl rounded-3xl border border-maroon-100 bg-white p-6 sm:p-8 shadow-2xl my-8 max-h-[90vh] overflow-y-auto">
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+      {/* Backdrop */}
+      <div 
+        className="fixed inset-0 bg-navy-950/80 backdrop-blur-sm transition-opacity" 
+        onClick={onClose}
+      />
+
+      <div className="relative w-full max-w-xl rounded-3xl border border-maroon-100 bg-white p-6 sm:p-8 shadow-2xl z-10 my-8 max-h-[90vh] overflow-y-auto animate-fade-in">
         <div className="flex items-center justify-between border-b border-navy-100 pb-4">
           <div className="flex items-center gap-2">
             <div className="rounded-xl bg-maroon-100 p-2 text-maroon-800">
@@ -246,6 +253,7 @@ export function ManualEnquiryModal({ isOpen, onClose, onSave }: ManualEnquiryMod
           </div>
         </form>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
