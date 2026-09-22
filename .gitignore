@@ -9,7 +9,10 @@ lerna-debug.log*
 
 # Dependencies & Build outputs
 node_modules
+client/node_modules
+server/node_modules
 dist
+client/dist
 dist-ssr
 *.local
 
@@ -17,7 +20,15 @@ dist-ssr
 .env
 .env.local
 .env.*.local
+client/.env
+client/.env.local
+client/.env.*.local
+server/.env
+server/.env.local
+server/.env.*.local
 !.env.example
+!client/.env.example
+!server/.env.example
 
 # Editor directories and files
 .vscode/*
@@ -29,3 +40,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.bolt
