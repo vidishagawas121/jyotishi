@@ -38,7 +38,12 @@ export function AppointmentForm() {
 ईमेल: ${form.email || 'उपलब्ध नहीं'}
 प्रश्न: ${form.question || 'सामान्य ज्योतिषीय परामर्श'}`;
 
-  const processSubmission = async () => {
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!form.name || !form.mobile) {
+      alert('कृपया नाम और मोबाइल नंबर अवश्य भरें।');
+      return;
+    }
     setIsSubmitting(true);
     try {
       await saveEnquiry({
@@ -54,10 +59,7 @@ export function AppointmentForm() {
         source: 'वेबसाइट अपॉइंटमेंट फॉर्म',
       });
       setSubmitted(true);
-      const whatsappMsg = buildMessage();
       setForm(initialForm);
-      // Open WhatsApp with pre-filled message
-      window.open(`${siteConfig.whatsappUrl}?text=${encodeURIComponent(whatsappMsg)}`, '_blank');
     } catch (err) {
       console.error('Failed to save enquiry:', err);
     } finally {
@@ -65,17 +67,34 @@ export function AppointmentForm() {
     }
   };
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    await processSubmission();
-  };
-
   const handleWhatsAppBook = async () => {
     if (!form.name || !form.mobile) {
       alert('कृपया नाम और मोबाइल नंबर अवश्य भरें।');
       return;
     }
-    await processSubmission();
+    setIsSubmitting(true);
+    try {
+      await saveEnquiry({
+        name: form.name,
+        mobile: form.mobile,
+        gender: form.gender,
+        dob: form.dob,
+        tob: form.tob,
+        pob: form.pob,
+        email: form.email,
+        question: form.question || 'WhatsApp अपॉइंटमेंट अनुरोध',
+        type: 'appointment',
+        source: 'WhatsApp अपॉइंटमेंट बटन',
+      });
+      const whatsappMsg = buildMessage();
+      setSubmitted(true);
+      setForm(initialForm);
+      window.open(`${siteConfig.whatsappUrl}?text=${encodeURIComponent(whatsappMsg)}`, '_blank');
+    } catch (err) {
+      console.error('Failed to save enquiry:', err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const inputClass =

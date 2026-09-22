@@ -25,8 +25,25 @@ export function ContactForm() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const buildMessage = () =>
+    `नमस्ते संगम ज्योतिष संस्थान,
+मुझे ज्योतिष परामर्श चाहिए।
+
+नाम: ${form.name}
+मोबाइल: ${form.mobile}
+लिंग: ${form.gender || 'उल्लेखित नहीं'}
+जन्म तिथि: ${form.dob || 'उपलब्ध नहीं'}
+जन्म समय: ${form.tob || 'उपलब्ध नहीं'}
+जन्म स्थान: ${form.pob || 'उल्लेखित नहीं'}
+ईमेल: ${form.email || 'उपलब्ध नहीं'}
+प्रश्न: ${form.question}`;
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (!form.name || !form.mobile || !form.question) {
+      alert('कृपया नाम, मोबाइल नंबर और प्रश्न विवरण भरें।');
+      return;
+    }
     setIsSubmitting(true);
     try {
       await saveEnquiry({
@@ -42,24 +59,42 @@ export function ContactForm() {
         source: 'संपर्क फॉर्म',
       });
       setSubmitted(true);
+      setForm(initialForm);
     } catch (err) {
       console.error('Failed to save contact enquiry:', err);
     } finally {
       setIsSubmitting(false);
     }
+  };
 
-    const message = `नमस्ते संगम ज्योतिष संस्थान,
-मुझे ज्योतिष परामर्श चाहिए।
-
-नाम: ${form.name}
-मोबाइल: ${form.mobile}
-लिंग: ${form.gender || 'उल्लेखित नहीं'}
-जन्म तिथि: ${form.dob || 'उपलब्ध नहीं'}
-जन्म समय: ${form.tob || 'उपलब्ध नहीं'}
-जन्म स्थान: ${form.pob || 'उल्लेखित नहीं'}
-ईमेल: ${form.email || 'उपलब्ध नहीं'}
-प्रश्न: ${form.question}`;
-    window.open(`${siteConfig.whatsappUrl}?text=${encodeURIComponent(message)}`, '_blank');
+  const handleWhatsAppSubmit = async () => {
+    if (!form.name || !form.mobile) {
+      alert('कृपया नाम और मोबाइल नंबर भरें।');
+      return;
+    }
+    setIsSubmitting(true);
+    try {
+      await saveEnquiry({
+        name: form.name,
+        mobile: form.mobile,
+        gender: form.gender,
+        dob: form.dob,
+        tob: form.tob,
+        pob: form.pob,
+        email: form.email,
+        question: form.question || 'सामान्य ज्योतिषीय पूछताछ',
+        type: 'contact',
+        source: 'WhatsApp संपर्क बटन',
+      });
+      const message = buildMessage();
+      setSubmitted(true);
+      setForm(initialForm);
+      window.open(`${siteConfig.whatsappUrl}?text=${encodeURIComponent(message)}`, '_blank');
+    } catch (err) {
+      console.error('Failed to save contact enquiry:', err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const inputClass =
@@ -173,17 +208,22 @@ export function ContactForm() {
           <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-emerald-600" />
           <div>
             <p className="font-semibold">आपकी पूछताछ सफलतापूर्वक दर्ज हो गई है!</p>
-            <p className="text-xs text-emerald-700">हमारा संस्थान शीघ्र ही आपसे संपर्क करेगा। WhatsApp संदेश भी तैयार कर दिया गया है।</p>
+            <p className="text-xs text-emerald-700">हमारा संस्थान शीघ्र ही आपसे संपर्क करेगा।</p>
           </div>
         </div>
       )}
 
-      <button type="submit" disabled={isSubmitting} className="btn-whatsapp w-full disabled:opacity-60">
-        <Send className="h-4 w-4" />
-        <span lang="hi">{isSubmitting ? 'दर्ज हो रहा है...' : 'WhatsApp पर पूछताछ भेजें'}</span>
-      </button>
+      <div className="flex flex-col gap-3 sm:flex-row pt-2">
+        <button type="submit" disabled={isSubmitting} className="btn-primary flex-1 disabled:opacity-60">
+          <span lang="hi">{isSubmitting ? 'दर्ज हो रहा है...' : 'पूछताछ सबमिट करें'}</span>
+        </button>
+        <button type="button" onClick={handleWhatsAppSubmit} disabled={isSubmitting} className="btn-whatsapp flex-1 disabled:opacity-60">
+          <Send className="h-4 w-4" />
+          <span lang="hi">WhatsApp पर भेजें</span>
+        </button>
+      </div>
       <p className="text-center text-xs text-navy-400" lang="hi">
-        फॉर्म जमा करने पर आपके विवरण के साथ WhatsApp संदेश तैयार होगा।
+        संस्थान के ज्योतिषी द्वारा विवरण का अवलोकन कर संपर्क किया जाएगा।
       </p>
     </form>
   );
