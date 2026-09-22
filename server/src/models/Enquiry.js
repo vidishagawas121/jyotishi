@@ -54,8 +54,8 @@ const enquirySchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      enum: ['male', 'female', 'other', ''],
       default: '',
+      trim: true,
     },
     question: {
       type: String,
@@ -64,13 +64,13 @@ const enquirySchema = new mongoose.Schema(
     },
     type: {
       type: String,
-      enum: ['appointment', 'contact', 'manual'],
       default: 'appointment',
+      trim: true,
     },
     status: {
       type: String,
-      enum: ['new', 'contacted', 'in_progress', 'completed', 'cancelled'],
       default: 'new',
+      trim: true,
       index: true,
     },
     adminNotes: {
@@ -81,6 +81,7 @@ const enquirySchema = new mongoose.Schema(
     source: {
       type: String,
       default: 'Website Form',
+      trim: true,
     },
   },
   {

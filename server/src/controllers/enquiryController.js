@@ -36,6 +36,7 @@ export async function createEnquiry(req, res) {
     const {
       name,
       phone,
+      mobile,
       email,
       service,
       serviceTitle,
@@ -51,9 +52,11 @@ export async function createEnquiry(req, res) {
       status,
       adminNotes,
       source,
-    } = req.body;
+    } = req.body || {};
 
-    if (!name || !phone) {
+    const contactPhone = phone || mobile;
+
+    if (!name || !contactPhone) {
       return res.status(400).json({
         success: false,
         message: 'कृपया नाम और मोबाइल नंबर दर्ज करें (Name and Phone are required)',
@@ -61,9 +64,9 @@ export async function createEnquiry(req, res) {
     }
 
     const enquiry = await Enquiry.create({
-      name,
-      phone,
-      email: email || '',
+      name: String(name).trim(),
+      phone: String(contactPhone).trim(),
+      email: email ? String(email).trim() : '',
       service: service || 'kundli-analysis',
       serviceTitle: serviceTitle || 'कुंडली विश्लेषण',
       astrologer: astrologer || 'any',
@@ -87,9 +90,9 @@ export async function createEnquiry(req, res) {
     });
   } catch (error) {
     console.error('Error creating enquiry:', error);
-    return res.status(500).json({
+    return res.status(error.name === 'ValidationError' ? 400 : 500).json({
       success: false,
-      message: 'सर्वर त्रुटि: ' + error.message,
+      message: 'त्रुटि: ' + error.message,
     });
   }
 }
