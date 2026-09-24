@@ -1,7 +1,7 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { services } from '@/data/services';
 import { getIcon } from '@/components/ui/Icon';
-import { waServiceLink } from '@/lib/whatsapp';
+import { useWhatsAppModal } from '@/context/WhatsAppModalContext';
 import { FAQAccordion } from '@/components/sections/FAQAccordion';
 import { CTASection } from '@/components/sections/CTASection';
 import { Reveal } from '@/components/ui/Reveal';
@@ -22,6 +22,7 @@ import {
 
 export function ServiceDetailPage() {
   const { slug } = useParams<{ slug: string }>();
+  const { openWhatsAppModal } = useWhatsAppModal();
 
   // Find service by exact slug or alias
   const service = services.find((s) => s.slug === slug);
@@ -168,15 +169,14 @@ export function ServiceDetailPage() {
                 <Calendar className="h-4 w-4" />
                 <span lang="hi">परामर्श बुक करें</span>
               </Link>
-              <a
-                href={waServiceLink(service.title)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3 font-semibold text-white shadow-soft transition-all duration-300 hover:bg-[#1da851] hover:-translate-y-0.5"
+              <button
+                type="button"
+                onClick={() => openWhatsAppModal({ defaultQuestion: `${service.title} परामर्श`, source: `सेवा पृष्ठ - ${service.title}` })}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3 font-semibold text-white shadow-soft transition-all duration-300 hover:bg-[#1da851] hover:-translate-y-0.5 cursor-pointer"
               >
                 <MessageCircle className="h-4 w-4" />
                 <span lang="hi">WhatsApp पर परामर्श लें</span>
-              </a>
+              </button>
             </div>
 
             {/* Trust Badges */}
@@ -365,15 +365,14 @@ export function ServiceDetailPage() {
                 </p>
 
                 <div className="mt-6 space-y-3">
-                  <a
-                    href={waServiceLink(service.title)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-white shadow-soft transition-all hover:bg-[#1da851]"
+                  <button
+                    type="button"
+                    onClick={() => openWhatsAppModal({ defaultQuestion: `${service.title} परामर्श`, source: `सेवा साइडबार - ${service.title}` })}
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-white shadow-soft transition-all hover:bg-[#1da851] cursor-pointer"
                   >
                     <MessageCircle className="h-4 w-4" />
                     <span lang="hi">WhatsApp पर पूछें</span>
-                  </a>
+                  </button>
                   <Link
                     to="/appointment"
                     className="btn-primary w-full text-center text-sm"

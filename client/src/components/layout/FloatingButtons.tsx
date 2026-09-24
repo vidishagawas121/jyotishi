@@ -1,8 +1,10 @@
 import { Phone } from 'lucide-react';
 import { siteConfig } from '@/data/siteConfig';
-import { waGeneral } from '@/lib/whatsapp';
+import { useWhatsAppModal } from '@/context/WhatsAppModalContext';
 
 export function FloatingButtons() {
+  const { openWhatsAppModal } = useWhatsAppModal();
+
   return (
     <div className="fixed bottom-5 right-4 z-50 flex flex-col items-end gap-3 sm:bottom-6 sm:right-6">
       {/* Phone */}
@@ -15,12 +17,11 @@ export function FloatingButtons() {
       </a>
 
       {/* WhatsApp */}
-      <a
-        href={waGeneral}
-        target="_blank"
-        rel="noopener noreferrer"
+      <button
+        type="button"
+        onClick={() => openWhatsAppModal({ source: 'Floating WhatsApp Button' })}
         aria-label="WhatsApp"
-        className="group relative flex items-center justify-center"
+        className="group relative flex items-center justify-center cursor-pointer"
       >
         <span className="absolute inset-0 animate-pulse-ring rounded-full bg-[#25D366]" aria-hidden />
         <span className="relative flex items-center gap-2 rounded-full bg-[#25D366] py-3 pl-3 pr-3 text-white shadow-card transition-all duration-300 hover:bg-[#1da851] sm:pr-5">
@@ -29,7 +30,7 @@ export function FloatingButtons() {
           </svg>
           <span className="hidden text-sm font-semibold sm:inline">WhatsApp पर बात करें</span>
         </span>
-      </a>
+      </button>
     </div>
   );
 }

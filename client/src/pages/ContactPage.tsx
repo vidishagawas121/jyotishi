@@ -1,11 +1,12 @@
 import { ContactForm } from '@/components/forms/ContactForm';
 import { Phone, Mail, MapPin, MessageCircle, Clock, Shield } from 'lucide-react';
 import { siteConfig } from '@/data/siteConfig';
-import { waGeneral } from '@/lib/whatsapp';
+import { useWhatsAppModal } from '@/context/WhatsAppModalContext';
 import { Reveal } from '@/components/ui/Reveal';
 import { SEO } from '@/components/ui/SEO';
 
 export function ContactPage() {
+  const { openWhatsAppModal } = useWhatsAppModal();
   return (
     <div className="bg-cream-50">
       <SEO
@@ -117,11 +118,10 @@ export function ContactPage() {
 
               {/* WhatsApp Card */}
               <Reveal delay={200}>
-                <a
-                  href={waGeneral}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="card-premium flex items-start gap-4 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-card group bg-gradient-to-r from-white via-white to-[#25D366]/5"
+                <button
+                  type="button"
+                  onClick={() => openWhatsAppModal({ source: 'संपर्क पृष्ठ कार्ड' })}
+                  className="card-premium flex items-start gap-4 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-card group bg-gradient-to-r from-white via-white to-[#25D366]/5 w-full text-left cursor-pointer"
                 >
                   <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-[#25D366]/15 text-[#25D366] transition-colors group-hover:bg-[#25D366] group-hover:text-white">
                     <MessageCircle className="h-6 w-6" />
@@ -137,7 +137,7 @@ export function ContactPage() {
                       तत्काल प्रतिक्रिया एवं त्वरित अपॉइंटमेंट
                     </p>
                   </div>
-                </a>
+                </button>
               </Reveal>
 
               {/* Email Card */}

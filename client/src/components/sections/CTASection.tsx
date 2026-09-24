@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Calendar, MessageCircle, Sparkles } from 'lucide-react';
 import { Reveal } from '@/components/ui/Reveal';
-import { waGeneral } from '@/lib/whatsapp';
+import { useWhatsAppModal } from '@/context/WhatsAppModalContext';
 
 interface CTASectionProps {
   title?: string;
@@ -12,6 +12,8 @@ export function CTASection({
   title = 'अपने प्रश्नों के लिए ज्योतिषीय परामर्श लें',
   subtitle = 'अपने जीवन से जुड़े महत्वपूर्ण प्रश्नों पर व्यक्तिगत मार्गदर्शन प्राप्त करने के लिए हमसे संपर्क करें।',
 }: CTASectionProps) {
+  const { openWhatsAppModal } = useWhatsAppModal();
+
   return (
     <section className="section-pad">
       <div className="container-px">
@@ -40,15 +42,14 @@ export function CTASection({
                   <Calendar className="h-5 w-5" />
                   <span lang="hi">परामर्श बुक करें</span>
                 </Link>
-                <a
-                  href={waGeneral}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3 font-medium text-white shadow-soft transition-all duration-300 hover:bg-[#1da851] hover:-translate-y-0.5 sm:w-auto"
+                <button
+                  type="button"
+                  onClick={() => openWhatsAppModal({ defaultQuestion: title, source: 'CTA Section' })}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3 font-medium text-white shadow-soft transition-all duration-300 hover:bg-[#1da851] hover:-translate-y-0.5 sm:w-auto cursor-pointer"
                 >
                   <MessageCircle className="h-5 w-5" />
                   <span lang="hi">WhatsApp पर संपर्क करें</span>
-                </a>
+                </button>
               </div>
             </div>
           </div>

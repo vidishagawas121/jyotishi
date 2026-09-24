@@ -5,9 +5,10 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 import { CTASection } from '@/components/sections/CTASection';
 import { SEO } from '@/components/ui/SEO';
 import { MessageSquareQuote, Star, ShieldCheck, Sparkles } from 'lucide-react';
-import { waGeneral } from '@/lib/whatsapp';
+import { useWhatsAppModal } from '@/context/WhatsAppModalContext';
 
 export function TestimonialsPage() {
+  const { openWhatsAppModal } = useWhatsAppModal();
   const [selectedService, setSelectedService] = useState<string>('सभी');
 
   const servicesList = ['सभी', ...Array.from(new Set(testimonials.map((t) => t.service)))];
@@ -139,15 +140,14 @@ export function TestimonialsPage() {
             अपने अनुभव और सुझाव साझा करने के लिए हमें WhatsApp पर संदेश भेजें।
           </p>
           <div className="mt-6">
-            <a
-              href={waGeneral}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary"
+            <button
+              type="button"
+              onClick={() => openWhatsAppModal({ defaultQuestion: 'संगम ज्योतिष संस्थान सेवा प्रतिक्रिया / समीक्षा', source: 'समीक्षा पृष्ठ' })}
+              className="btn-primary cursor-pointer inline-flex items-center gap-2"
             >
               <Sparkles className="h-4 w-4" />
               <span lang="hi">अपनी प्रतिक्रिया साझा करें</span>
-            </a>
+            </button>
           </div>
         </div>
       </section>

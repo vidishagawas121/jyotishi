@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 import { Phone, Facebook, Instagram, Youtube, MessageCircle } from 'lucide-react';
 import { siteConfig } from '@/data/siteConfig';
+import { useWhatsAppModal } from '@/context/WhatsAppModalContext';
 
 export function Footer() {
+  const { openWhatsAppModal } = useWhatsAppModal();
+
   return (
     <footer className="bg-navy-950 text-cream-100">
       <div className="container-px py-8 lg:py-10">
@@ -28,15 +31,14 @@ export function Footer() {
             </p>
 
             <div className="mt-3.5 flex gap-2.5">
-              <a
-                href={siteConfig.social.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
+                onClick={() => openWhatsAppModal({ source: 'Footer Social Icon' })}
                 aria-label="WhatsApp"
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-navy-900 text-cream-100 transition-colors hover:bg-[#25D366] hover:text-white"
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-navy-900 text-cream-100 transition-colors hover:bg-[#25D366] hover:text-white cursor-pointer"
               >
                 <MessageCircle className="h-4 w-4" />
-              </a>
+              </button>
               <a
                 href={siteConfig.social.facebook}
                 target="_blank"
@@ -148,10 +150,14 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href={siteConfig.social.whatsapp} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 text-cream-100/85 transition-colors hover:text-gold-300">
+                <button
+                  type="button"
+                  onClick={() => openWhatsAppModal({ source: 'Footer Contact Link' })}
+                  className="flex items-center gap-2.5 text-cream-100/85 transition-colors hover:text-gold-300 cursor-pointer"
+                >
                   <MessageCircle className="h-4 w-4 flex-shrink-0 text-[#25D366]" />
                   <span>WhatsApp परामर्श</span>
-                </a>
+                </button>
               </li>
               <li className="text-cream-100/70 pt-1 text-xs sm:text-sm">
                 <span className="text-gold-300/90 font-semibold" lang="hi">परामर्श समय:</span>{' '}

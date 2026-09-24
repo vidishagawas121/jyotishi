@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Sparkles, CheckCircle2, MessageCircle, Calendar, ArrowRight, ShieldCheck, BookOpen } from 'lucide-react';
 import { Reveal } from '@/components/ui/Reveal';
-import { waLink } from '@/lib/whatsapp';
+import { useWhatsAppModal } from '@/context/WhatsAppModalContext';
 
 export function KundliAnalysisFeature() {
-  const waKundliMsg = waLink('नमस्ते, मुझे संगम ज्योतिष संस्थान से अपनी जन्म कुंडली का विश्लेषण कराना है।');
+  const { openWhatsAppModal } = useWhatsAppModal();
 
   const analysisPoints = [
     {
@@ -121,15 +121,14 @@ export function KundliAnalysisFeature() {
                   <span lang="hi">कुंडली परामर्श बुक करें</span>
                 </Link>
 
-                <a
-                  href={waKundliMsg}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-3.5 font-semibold text-white shadow-soft transition-all duration-300 hover:bg-[#1da851] hover:scale-105 active:scale-95"
+                <button
+                  type="button"
+                  onClick={() => openWhatsAppModal({ defaultQuestion: 'जन्म कुंडली का सूक्ष्म विश्लेषण परामर्श', source: 'Kundli Analysis Section' })}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-3.5 font-semibold text-white shadow-soft transition-all duration-300 hover:bg-[#1da851] hover:scale-105 active:scale-95 cursor-pointer"
                 >
                   <MessageCircle className="h-4 w-4" />
                   <span lang="hi">WhatsApp पर कुंडली भेजें</span>
-                </a>
+                </button>
 
                 <Link
                   to="/services/kundli-analysis"

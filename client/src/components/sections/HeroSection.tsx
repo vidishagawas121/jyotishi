@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import { Calendar, MessageCircle, Sparkles, Check } from 'lucide-react';
 import { trustIndicators } from '@/data/content';
-import { waGeneral } from '@/lib/whatsapp';
+import { useWhatsAppModal } from '@/context/WhatsAppModalContext';
 
 export function HeroSection() {
+  const { openWhatsAppModal } = useWhatsAppModal();
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-maroon-950 via-maroon-900 to-saffron-900 text-cream-50">
       {/* Starfield */}
@@ -68,15 +70,14 @@ export function HeroSection() {
                 <Sparkles className="h-4 w-4 text-gold-300" />
                 <span lang="hi">हमारी सेवाएं देखें</span>
               </Link>
-              <a
-                href={waGeneral}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 font-medium text-white shadow-soft transition-all duration-300 hover:bg-[#1da851] hover:-translate-y-0.5 sm:w-auto"
+              <button
+                type="button"
+                onClick={() => openWhatsAppModal({ source: 'Hero Section' })}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 font-medium text-white shadow-soft transition-all duration-300 hover:bg-[#1da851] hover:-translate-y-0.5 sm:w-auto cursor-pointer"
               >
                 <MessageCircle className="h-5 w-5" />
                 <span lang="hi">WhatsApp पर संपर्क करें</span>
-              </a>
+              </button>
             </div>
 
             {/* Trust indicators */}

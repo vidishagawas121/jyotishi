@@ -5,9 +5,10 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 import { CTASection } from '@/components/sections/CTASection';
 import { SEO } from '@/components/ui/SEO';
 import { HelpCircle, Search, MessageCircle } from 'lucide-react';
-import { waGeneral } from '@/lib/whatsapp';
+import { useWhatsAppModal } from '@/context/WhatsAppModalContext';
 
 export function FAQPage() {
+  const { openWhatsAppModal } = useWhatsAppModal();
   const [search, setSearch] = useState('');
 
   const filteredFaqs = faqs.filter(
@@ -116,14 +117,13 @@ export function FAQPage() {
               हमारे प्रतिनिधि से सीधे WhatsApp पर जुड़ें और अपने प्रश्न का त्वरित उत्तर प्राप्त करें।
             </p>
             <div className="mt-5">
-              <a
-                href={waGeneral}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-whatsapp text-sm"
+              <button
+                type="button"
+                onClick={() => openWhatsAppModal({ defaultQuestion: search ? `प्रश्न: ${search}` : 'ज्योतिष से संबंधित प्रश्न', source: 'FAQ पृष्ठ' })}
+                className="btn-whatsapp text-sm cursor-pointer"
               >
                 WhatsApp पर प्रश्न पूछें
-              </a>
+              </button>
             </div>
           </div>
         </div>

@@ -3,9 +3,10 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, Phone, MessageCircle } from 'lucide-react';
 import { siteConfig, navLinks } from '@/data/siteConfig';
 import { services } from '@/data/services';
-import { waGeneral } from '@/lib/whatsapp';
+import { useWhatsAppModal } from '@/context/WhatsAppModalContext';
 
 export function Navbar() {
+  const { openWhatsAppModal } = useWhatsAppModal();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -180,15 +181,17 @@ export function Navbar() {
               )
             )}
             <div className="flex flex-col gap-2.5 pt-3">
-              <a
-                href={waGeneral}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-medium text-white shadow-soft transition-all hover:bg-[#1da851]"
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileOpen(false);
+                  openWhatsAppModal({ source: 'Navbar Mobile Menu' });
+                }}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-medium text-white shadow-soft transition-all hover:bg-[#1da851] cursor-pointer"
               >
                 <MessageCircle className="h-4 w-4" />
                 <span lang="hi">WhatsApp पर संपर्क करें</span>
-              </a>
+              </button>
               <Link to="/appointment" className="btn-gold w-full text-center text-sm">
                 <span lang="hi">परामर्श बुक करें</span>
               </Link>

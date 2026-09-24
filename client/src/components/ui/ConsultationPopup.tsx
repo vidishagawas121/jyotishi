@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
-import { waLink } from '@/lib/whatsapp';
+import { useWhatsAppModal } from '@/context/WhatsAppModalContext';
 
 export function ConsultationPopup() {
   const [isOpen, setIsOpen] = useState(false);
+  const { openWhatsAppModal } = useWhatsAppModal();
 
   useEffect(() => {
     // Show popup 5 seconds after page load/reload
@@ -64,18 +65,23 @@ export function ConsultationPopup() {
 
           {/* Big Yellow / Gold CTA Button */}
           <div className="w-full pt-3 sm:pt-4">
-            <a
-              href={waLink('नमस्ते, मुझे नि:शुल्क ज्योतिष सलाह / परामर्श चाहिए।')}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setIsOpen(false)}
-              className="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-amber-400 via-gold-400 to-amber-500 px-6 sm:px-8 py-3 sm:py-3.5 font-devanagari text-base sm:text-lg font-bold text-navy-950 shadow-[0_6px_25px_rgba(234,179,8,0.5)] transition-all duration-300 hover:brightness-110 hover:scale-[1.02] active:scale-95"
+            <button
+              type="button"
+              onClick={() => {
+                setIsOpen(false);
+                openWhatsAppModal({
+                  defaultQuestion: 'नि:शुल्क ज्योतिष सलाह / परामर्श',
+                  source: 'ऑटो टाइमर पॉपअप',
+                });
+              }}
+              className="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-amber-400 via-gold-400 to-amber-500 px-6 sm:px-8 py-3 sm:py-3.5 font-devanagari text-base sm:text-lg font-bold text-navy-950 shadow-[0_6px_25px_rgba(234,179,8,0.5)] transition-all duration-300 hover:brightness-110 hover:scale-[1.02] active:scale-95 cursor-pointer"
             >
               <span lang="hi">नि:शुल्क सलाह पाएं</span>
-            </a>
+            </button>
           </div>
         </div>
       </div>
     </div>
   );
 }
+
