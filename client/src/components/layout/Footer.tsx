@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Phone, Facebook, Instagram, Youtube, MessageCircle } from 'lucide-react';
+import { Phone, Facebook, Instagram, Youtube, MessageCircle, MapPin } from 'lucide-react';
 import { siteConfig } from '@/data/siteConfig';
 import { useWhatsAppModal } from '@/context/WhatsAppModalContext';
 
@@ -158,6 +158,15 @@ export function Footer() {
                   <MessageCircle className="h-4 w-4 flex-shrink-0 text-[#25D366]" />
                   <span>WhatsApp परामर्श</span>
                 </button>
+              </li>
+              <li>
+                <div className="flex items-start gap-2.5 text-cream-100/85">
+                  <MapPin className="h-4 w-4 flex-shrink-0 text-gold-400 mt-0.5" />
+                  <div className="text-xs leading-relaxed">
+                    <p className="font-semibold text-cream-50" lang="hi">शोभनाथ मंदिर (Sobhnath Temple)</p>
+                    <p className="text-cream-100/75" lang="hi">बेलन नदी तट, कोरांव, प्रयागराज (उ.प्र.) - 212306</p>
+                  </div>
+                </div>
               </li>
               <li className="text-cream-100/70 pt-1 text-xs sm:text-sm">
                 <span className="text-gold-300/90 font-semibold" lang="hi">परामर्श समय:</span>{' '}

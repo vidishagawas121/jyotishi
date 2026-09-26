@@ -41,7 +41,7 @@ export const env: EnvConfig = {
   whatsappUrl: `https://wa.me/${whatsappNum.replace(/[^0-9]/g, '')}`,
   telUrl: `tel:${rawPhone.replace(/\s+/g, '')}`,
   email: getEnv('VITE_EMAIL', 'contact@sangamjyotish.com'),
-  address: getEnv('VITE_ADDRESS', 'वाराणसी / हरिद्वार / दिल्ली एनसीआर, भारत'),
+  address: getEnv('VITE_ADDRESS', 'शोभनाथ मंदिर (Sobhnath Temple), बेलन नदी तट, कोरांव, प्रयागराज, उत्तर प्रदेश - 212306, भारत'),
   facebookUrl: getEnv('VITE_FACEBOOK_URL', '#'),
   instagramUrl: getEnv('VITE_INSTAGRAM_URL', '#'),
   youtubeUrl: getEnv('VITE_YOUTUBE_URL', '#'),

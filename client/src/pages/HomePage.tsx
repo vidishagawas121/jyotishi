@@ -49,6 +49,10 @@ export function HomePage() {
           description: 'प्रामाणिक वैदिक ज्योतिष, कुंडली विश्लेषण, विवाह एवं कुंडली मिलान, करियर, व्यापार, वास्तु और व्यक्तिगत ज्योतिष परामर्श।',
           address: {
             '@type': 'PostalAddress',
+            streetAddress: 'शोभनाथ मंदिर (Sobhnath Temple), बेलन नदी तट',
+            addressLocality: 'कोरांव (Koraon), प्रयागराज (Prayagraj)',
+            addressRegion: 'Uttar Pradesh',
+            postalCode: '212306',
             addressCountry: 'IN',
           },
           aggregateRating: {

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Shield, Heart, Award, Compass, Eye, Target, Calendar, CheckCircle2, Sparkles } from 'lucide-react';
+import { Shield, Heart, Award, Compass, Eye, Target, Calendar, CheckCircle2, Sparkles, MapPin } from 'lucide-react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Reveal } from '@/components/ui/Reveal';
 import { CTASection } from '@/components/sections/CTASection';
@@ -92,6 +92,14 @@ export function AboutPage() {
             name: 'Sangam Jyotish Sansthan',
             alternateName: 'संगम ज्योतिष संस्थान',
             url: 'https://sangamjyotish.com',
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: 'शोभनाथ मंदिर (Sobhnath Temple), बेलन नदी के तट पर',
+              addressLocality: 'कोरांव (Koraon), प्रयागराज (Prayagraj)',
+              addressRegion: 'Uttar Pradesh',
+              postalCode: '212306',
+              addressCountry: 'IN',
+            },
           },
         }}
       />
@@ -193,6 +201,36 @@ export function AboutPage() {
         <div className="container-px">
           <Reveal>
             <KundliChartSection />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Sacred Location & Temple Heritage */}
+      <section className="section-pad bg-cream-100/60 border-y border-gold-200/40">
+        <div className="container-px">
+          <Reveal>
+            <div className="mx-auto max-w-4xl rounded-3xl border border-gold-400/30 bg-gradient-to-br from-maroon-950 via-maroon-900 to-navy-950 p-8 sm:p-10 shadow-card text-cream-50 relative overflow-hidden">
+              <div className="starfield absolute inset-0 opacity-20" aria-hidden />
+              <div className="relative z-10 flex flex-col md:flex-row items-center gap-6 md:gap-8">
+                <div className="flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-2xl bg-gold-400/20 text-gold-300 ring-2 ring-gold-400/30 shadow-soft">
+                  <MapPin className="h-10 w-10 text-gold-400" />
+                </div>
+                <div className="text-center md:text-left">
+                  <span className="inline-block rounded-full bg-gold-400/15 border border-gold-400/30 px-3.5 py-1 text-xs font-semibold text-gold-300 mb-2">
+                    पावन तीर्थ स्थल एवं मुख्य केंद्र
+                  </span>
+                  <h3 className="font-devanagari text-2xl font-bold text-cream-50 sm:text-3xl" lang="hi">
+                    शोभनाथ मंदिर (Sobhnath Temple), बेलन नदी तट
+                  </h3>
+                  <p className="mt-2 text-sm sm:text-base text-cream-100/85 leading-relaxed" lang="hi">
+                    संगम ज्योतिष संस्थान का पावन केंद्र प्रयागराज के कोरांव (212306) में पवित्र बेलन नदी के तट पर स्थित ऐतिहासिक <strong>शोभनाथ मंदिर (Sobhnath Mandir)</strong> के सानिध्य में स्थापित है। इस आध्यात्मिक एवं शांत वातावरण में जातक ऑफलाइन व्यक्तिगत परामर्श एवं पूजन-अनुष्ठान हेतु पधार सकते हैं।
+                  </p>
+                  <p className="mt-3 text-xs sm:text-sm font-medium text-gold-300">
+                    📍 Sangam Jyotish Sansthan, Koraon, Prayagraj, Uttar Pradesh, 212306, India
+                  </p>
+                </div>
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>

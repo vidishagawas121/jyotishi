@@ -11,8 +11,8 @@ export interface Astrologer {
 
 export const astrologers: Astrologer[] = [
   {
-    id: 'acharya-surya',
-    name: 'आचार्य सूर्य जी',
+    id: 'acharya-suryadev',
+    name: 'आचार्य सूर्यदेव जी',
     designation: 'मुख्य ज्योतिषाचार्य',
     image: '/images/astrologer-1.png',
     specializations: ['वैदिक ज्योतिष', 'वशीकरण', 'प्रेमसमस्या'],

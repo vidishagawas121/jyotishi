@@ -1,4 +1,4 @@
-import { Phone, Facebook, Instagram, Youtube } from 'lucide-react';
+import { Phone, Facebook, Instagram, Youtube, MapPin } from 'lucide-react';
 import { siteConfig } from '@/data/siteConfig';
 import { useWhatsAppModal } from '@/context/WhatsAppModalContext';
 
@@ -8,13 +8,19 @@ export function TopBar() {
   return (
     <div className="hidden bg-navy-950 text-cream-100 md:block">
       <div className="container-px flex h-10 items-center justify-between text-sm">
-        <a
-          href={siteConfig.telUrl}
-          className="flex items-center gap-2 transition-colors hover:text-gold-300"
-        >
-          <Phone className="h-3.5 w-3.5 text-gold-400" />
-          <span className="font-medium">Call Us: {siteConfig.phone}</span>
-        </a>
+        <div className="flex items-center gap-6">
+          <a
+            href={siteConfig.telUrl}
+            className="flex items-center gap-2 transition-colors hover:text-gold-300"
+          >
+            <Phone className="h-3.5 w-3.5 text-gold-400" />
+            <span className="font-medium">Call Us: {siteConfig.phone}</span>
+          </a>
+          <span className="hidden lg:flex items-center gap-1.5 text-xs text-cream-100/75 border-l border-navy-800 pl-6">
+            <MapPin className="h-3.5 w-3.5 text-gold-400" />
+            <span>शोभनाथ मंदिर, कोरांव, प्रयागराज (212306)</span>
+          </span>
+        </div>
         <div className="flex items-center gap-3">
           <span className="text-cream-100/60">हमसे जुड़ें:</span>
           <button

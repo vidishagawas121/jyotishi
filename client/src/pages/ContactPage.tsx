@@ -34,7 +34,10 @@ export function ContactPage() {
             email: 'contact@sangamjyotish.com',
             address: {
               '@type': 'PostalAddress',
-              addressLocality: 'Varanasi',
+              streetAddress: 'शोभनाथ मंदिर (Sobhnath Temple), बेलन नदी के तट पर',
+              addressLocality: 'कोरांव (Koraon), प्रयागराज (Prayagraj)',
+              addressRegion: 'Uttar Pradesh',
+              postalCode: '212306',
               addressCountry: 'IN',
             },
           },
@@ -163,18 +166,24 @@ export function ContactPage() {
               {/* Address Card */}
               <Reveal delay={300}>
                 <div className="card-premium flex items-start gap-4 p-5">
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-navy-50 text-navy-700">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-maroon-50 text-maroon-700">
                     <MapPin className="h-5 w-5" />
                   </div>
                   <div>
                     <h3 className="text-xs font-semibold text-saffron-600 uppercase tracking-wider">
                       संस्थान का पता (Sansthan Address)
                     </h3>
-                    <p className="mt-1 text-sm font-medium text-navy-800">
-                      {siteConfig.address}
+                    <p className="mt-1 text-sm font-bold text-navy-900">
+                      शोभनाथ मंदिर (Sobhnath Temple)
                     </p>
-                    <p className="text-xs text-navy-500 mt-0.5">
-                      ऑफलाइन व्यक्तिगत परामर्श हेतु
+                    <p className="text-xs text-navy-700 mt-0.5">
+                      बेलन नदी के तट पर, कोरांव (Koraon), प्रयागराज, उत्तर प्रदेश - 212306, भारत
+                    </p>
+                    <p className="text-[11px] text-navy-500 mt-1 font-sans">
+                      Sangam Jyotish Sansthan, Prayagraj, Uttar Pradesh, 212306, India
+                    </p>
+                    <p className="text-xs text-maroon-700 font-medium mt-1.5">
+                      ✦ ऑफलाइन व्यक्तिगत परामर्श एवं दर्शन हेतु
                     </p>
                   </div>
                 </div>
