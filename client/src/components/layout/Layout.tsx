@@ -5,6 +5,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { FloatingButtons } from '@/components/layout/FloatingButtons';
 import { ConsultationPopup } from '@/components/ui/ConsultationPopup';
+import { GlobalScrollDown } from '@/components/layout/GlobalScrollDown';
 
 interface LayoutProps {
   children: ReactNode;
@@ -29,8 +30,10 @@ export function Layout({ children }: LayoutProps) {
       <Navbar />
       <main className="flex-1">{children}</main>
       <Footer />
+      <GlobalScrollDown />
       <FloatingButtons />
       <ConsultationPopup />
     </div>
   );
 }
+
