@@ -43,7 +43,7 @@ export function HomePage() {
           name: 'संगम ज्योतिष संस्थान (Sangam Jyotish Sansthan)',
           alternateName: 'Sangam Jyotish',
           url: 'https://sangamjyotish.com',
-          telephone: '+91 7800224400',
+          telephone: '+91 9935042824',
           priceRange: '₹₹',
           image: 'https://sangamjyotish.com/favicon.svg',
           description: 'प्रामाणिक वैदिक ज्योतिष, कुंडली विश्लेषण, विवाह एवं कुंडली मिलान, करियर, व्यापार, वास्तु और व्यक्तिगत ज्योतिष परामर्श।',

@@ -52,7 +52,7 @@ export function ServiceDetailPage() {
               '@type': 'ProfessionalService',
               name: 'Sangam Jyotish Sansthan',
               alternateName: 'संगम ज्योतिष संस्थान',
-              telephone: '+91 7800224400',
+              telephone: '+91 9935042824',
               url: 'https://sangamjyotish.com',
             },
             areaServed: 'India',

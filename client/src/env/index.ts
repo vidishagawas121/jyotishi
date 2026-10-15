@@ -30,12 +30,12 @@ const getEnv = (key: string, fallback: string = ''): string => {
     : fallback;
 };
 
-const rawPhone = getEnv('VITE_PHONE_RAW', '+917800224400');
-const whatsappNum = getEnv('VITE_WHATSAPP_NUMBER', '917800224400');
+const rawPhone = getEnv('VITE_PHONE_RAW', '+919935042824');
+const whatsappNum = getEnv('VITE_WHATSAPP_NUMBER', '919935042824');
 
 export const env: EnvConfig = {
   siteUrl: getEnv('VITE_SITE_URL', 'https://sangamjyotish.com').replace(/\/$/, ''),
-  phone: getEnv('VITE_PHONE', '+91 7800224400'),
+  phone: getEnv('VITE_PHONE', '+91 9935042824'),
   phoneRaw: rawPhone,
   whatsappNumber: whatsappNum,
   whatsappUrl: `https://wa.me/${whatsappNum.replace(/[^0-9]/g, '')}`,

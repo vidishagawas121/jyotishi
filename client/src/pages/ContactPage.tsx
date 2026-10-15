@@ -11,7 +11,7 @@ export function ContactPage() {
     <div className="bg-cream-50">
       <SEO
         title="संपर्क करें | संगम ज्योतिष संस्थान"
-        description="संगम ज्योतिष संस्थान से फोन (+91 7800224400), WhatsApp या ऑनलाइन फॉर्म के माध्यम से सीधे संपर्क करें और अपनी कुंडली के अनुसार तुरंत मार्गदर्शन प्राप्त करें।"
+        description="संगम ज्योतिष संस्थान से फोन (+91 9935042824), WhatsApp या ऑनलाइन फॉर्म के माध्यम से सीधे संपर्क करें और अपनी कुंडली के अनुसार तुरंत मार्गदर्शन प्राप्त करें।"
         canonical="/contact"
         keywords={[
           'संगम ज्योतिष संपर्क',
@@ -30,7 +30,7 @@ export function ContactPage() {
           mainEntity: {
             '@type': 'ProfessionalService',
             name: 'Sangam Jyotish Sansthan',
-            telephone: '+91 7800224400',
+            telephone: '+91 9935042824',
             email: 'contact@sangamjyotish.com',
             address: {
               '@type': 'PostalAddress',
