@@ -1,9 +1,23 @@
-import { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { lazy, Suspense, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { WhatsAppModalProvider } from '@/context/WhatsAppModalContext';
 import { WhatsAppConsultationModal } from '@/components/modals/WhatsAppConsultationModal';
+
+function GoogleTagRouteTracker() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && typeof (window as any).gtag === 'function') {
+      (window as any).gtag('config', 'AW-18518508146', {
+        page_path: location.pathname + location.search,
+      });
+    }
+  }, [location]);
+
+  return null;
+}
 
 // Route-level code splitting
 const HomePage = lazy(() => import('@/pages/HomePage').then((m) => ({ default: m.HomePage })));
@@ -24,6 +38,7 @@ const NotFoundPage = lazy(() => import('@/pages/NotFoundPage').then((m) => ({ de
 function App() {
   return (
     <BrowserRouter>
+      <GoogleTagRouteTracker />
       <WhatsAppModalProvider>
         <Layout>
           <Suspense fallback={<LoadingSpinner />}>
